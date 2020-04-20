@@ -36,6 +36,7 @@ button:focus {
 
 img {
     width: 100px;
+    
 }
 
 div>p:first-child {
@@ -43,7 +44,17 @@ div>p:first-child {
 }
 
 div img {
-    background: black;
+    background: white;
+    }
+
+.camiseta {
+    width: 80px;
+    height: auto;
+}
+
+.chinelo {
+    width:80px;
+    height: auto;
 }
 
 .botao-amarelo {
