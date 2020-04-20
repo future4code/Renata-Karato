@@ -64,7 +64,9 @@ div img {
 }
 
 .icone {
-    height: 15px;
+    height: 30px;
+    width: 30px;
+    background-color: white;
 }
 
 
@@ -130,7 +132,6 @@ td button {
     margin-top: 20px;
     height: 100px;
 }
-
 
 #back-button {
     background-color: white;
