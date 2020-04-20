@@ -12,6 +12,7 @@
 * {
     margin: 0;
     padding: 0;
+    outline: none;
 }
 
 body {
@@ -75,6 +76,7 @@ div img {
     position: absolute;
     right: 60%;
     left: 40%;
+    top: 300px;
 }
 
 .botao-amarelo:hover {
@@ -117,7 +119,7 @@ div img {
 #container-para-comprar {
     background-color: #e7eb90;
     width: 100%;
-    position: relative;    
+    position: relative;
 }
 
 #container-para-comprar>p {
@@ -126,6 +128,7 @@ div img {
     font-size: 60px;
     position: relative;
     width: 100%;
+    top: 120px;
 }
 
 
@@ -178,7 +181,13 @@ td button {
     border-left: none;
 }
 
+.end-button {
+    position: relative;
+    width: 100%;
+}
+
 #back-button {
+    position: absolute;
     background-color: white;
     width: 100px;
     height: 20px;
@@ -186,6 +195,9 @@ td button {
     border-radius: 5px;
     font-size: 10px;
     color: black;
+    left: 45%;
+    right: 55%;
+    top: 80px;
 }
 
 #back-button:hover {
