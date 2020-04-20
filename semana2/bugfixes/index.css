@@ -43,6 +43,10 @@ div>p:first-child {
     display: inline;
 }
 
+ol {
+    display: inline-block;
+}
+
 div img {
     background: white;
     }
