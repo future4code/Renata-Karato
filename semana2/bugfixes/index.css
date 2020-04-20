@@ -45,6 +45,7 @@ div>p:first-child {
 
 ol {
     display: inline-block;
+
 }
 
 div img {
@@ -89,10 +90,13 @@ div img {
 
 .icone {
     height: 20px;
-    width: 20px;
-    background-color: white;
+    width: 20px;  
 }
 
+.icone:hover {
+    background-color: grey;
+    opacity: 0.8;
+}
 
 /** 
   *
