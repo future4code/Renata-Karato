@@ -1,0 +1,122 @@
+* {
+    box-sizing: border-box;
+    }
+
+@font-face {
+    font-family: "MyriadPro";
+    src: url(FONTS/MyriadPro.otf);
+    }
+
+@font-face {
+    font-family: "CaviarDreams";
+    src: url(FONTS/CaviarDreams.ttf);
+    }
+
+@font-face {
+    font-family: "Please Write Me a Song";
+    src: url(FONTS/PleaseWriteMeASong.ttf);
+    }
+
+@font-face {
+    font-family: "Bewilderment";
+    src: url(FONTS/Bewilderment.otf);
+    }
+
+body {
+    margin: 0;
+    padding: 0;
+    }
+
+.header {
+    overflow: hidden;
+    background-color: #EFBAC0;
+    width: 100%;
+    height: 10vh;
+    }
+
+.RMK {
+    height:8vh;
+    width: auto;
+    position: absolute;
+    top: 1vh;
+    left: 5vw;
+    }
+
+.header ul {
+    float:right;
+    padding-right: 20px;   
+    text-align: center;
+    list-style: none;
+    }
+
+.header ul li {
+    display: inline;
+    }
+
+.header ul li a {
+    font-family: "MyriadPro";
+    font-size: 18px;
+    display: inline-block;
+    color:#354356;
+    text-decoration: none;
+    padding: 5px;
+    }
+
+.footer {
+    position: absolute;
+    overflow: hidden;
+    width: 100%;
+    left: 0;
+    top: 52vh;
+    }
+    
+.photo {
+    width: 100%;
+    height: auto;
+    }
+
+.footer ul {
+    float:right;      
+    text-align: center;
+    list-style: none;
+    }
+        
+.footer ul li {
+    display: inline;
+    }
+        
+.icones-end {
+    position: absolute;
+    top: 10vh;
+    text-align: left;
+    font-family: "MyriadPro";
+    font-size: 20px;
+    color:white;
+    text-decoration: none;
+    padding: 5px;
+    }
+    
+.contactme {
+    position: absolute;
+    top: 10vh;
+    left: 20vw;
+    text-align: right;
+    font-family: "MyriadPro";
+    font-size: 20px;
+    color:white;
+    text-decoration: none;
+    padding: 5px;
+    }
+    
+.footer-2 {
+    display: block;
+    position: absolute;
+    top: 90vh;
+    bottom:0;
+    left:0;
+    padding: 10px;
+    width: 100%;
+    height: 10vh;
+    color: #354356;
+    background-color: #EFBAC0;
+    }

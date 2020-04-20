@@ -1,0 +1,271 @@
+* {
+    box-sizing: border-box;
+    }
+
+@font-face {
+    font-family: "MyriadPro";
+    src: url(FONTS/MyriadPro.otf);
+    }
+
+@font-face {
+    font-family: "CaviarDreams";
+    src: url(FONTS/CaviarDreams.ttf);
+    }
+
+@font-face {
+    font-family: "Please Write Me a Song";
+    src: url(FONTS/PleaseWriteMeASong.ttf);
+    }
+
+@font-face {
+    font-family: "Bewilderment";
+    src: url(FONTS/Bewilderment.otf);
+    }
+
+body {
+    margin: 0;
+    padding: 0;
+    }
+
+.header {
+    overflow: hidden;
+    background-color: #EFBAC0;
+    width: 100%;
+    height: 10vh;
+    }
+
+.RMK {
+    height:8vh;
+    width: auto;
+    position: absolute;
+    top: 1vh;
+    left: 5vw;
+    }
+
+.header ul {
+    float:right;
+    padding-right: 20px;   
+    text-align: center;
+    list-style: none;
+    }
+
+.header ul li {
+    display: inline;
+    }
+
+.header ul li a {
+    font-family: "MyriadPro";
+    font-size: 18px;
+    display: inline-block;
+    color:#354356;
+    text-decoration: none;
+    padding: 5px;
+    }
+
+.img-start {
+    display:block;
+    width:100%;
+    height: 80vh;
+   }
+
+.overlay {
+    position: absolute;
+    top: 10vh;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80vh;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: #B3CBCF;
+    }
+
+.image-start:hover .overlay {
+    opacity:0.8;
+    }
+
+.text-inicio {
+    color: white;
+    font-family: "CaviarDreams";
+    font-size: 32px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    }
+
+.image-profile {
+    top: 70vh;
+    left: 40vw;
+    right: 60vw;;
+    display: block;
+    position: absolute;
+    }
+
+.img-profile {
+    width: 40vh;
+    height: auto;
+    border-radius: 60%;
+    border: 8px solid white;
+    }
+
+.box {
+    display: block;
+    width:100%;
+    top: 90vh;
+    height: 120vh;
+    background-color: #EFBAC0;
+    }
+
+.text-presentation {
+    text-align: center;
+    top: 105vh;
+    left: 28vw;
+    display: block;
+    position: absolute;
+    }
+
+.text-name {
+    font-family: "Bewilderment";
+    font-size: 55px;
+    color: #354356;
+    }
+
+.text-introduction {
+    display: block;
+    position: absolute;
+    top: 120vh;
+    right: auto;
+    left: 21vw;
+    }
+
+.text-pequeno {
+    font-family: "CaviarDreams";
+    font-size: 25px;
+    color: white;
+    }
+
+.education {
+    top: 140vh;
+    font-family: "CaviarDreams";
+    font-size: 20px;
+    color: white;
+    position: absolute;
+    overflow: hidden;
+    width: 100%;
+    left: 0;
+    text-decoration: none;
+    }
+
+.education ul {
+    float:left;      
+    text-align: left;
+    list-style: none;
+    }
+
+.habilidades {
+    top: 133vh;
+    font-family: "CaviarDreams";
+    font-size: 20px;
+    color: white;
+    position: absolute;
+    overflow: hidden;
+    width: 100%;
+    text-decoration: none;
+    right: 5vw;
+    }
+
+.habilidades ul {
+    float:right;      
+    text-align: left;
+    list-style: none;
+    }
+
+.box2 {
+    display: block;
+    width:100%;
+    top: 210vh;
+    height: 50vh;
+    background-color: #354356;
+    }
+
+.portfolio-texto {
+    text-align: center;
+    top: 212vh;
+    left: 42vw;
+    display: block;
+    position: absolute;
+    font-family: "CaviarDreams";
+    font-size: 25px;
+    color: white;
+    }
+
+.projetos {
+    display: block;
+    position: absolute;
+    top: 225vh;
+    left: 36vw;    
+    }
+
+.image-end img {
+    display: block;
+    top: 290vh;
+    bottom: 10vh;
+    max-width: 100%;
+    height: auto;
+    }
+
+.footer {
+    position: absolute;
+    overflow: hidden;
+    width: 100%;
+    left: 0;
+    }
+
+.footer ul {
+    float:right;      
+    text-align: center;
+    list-style: none;
+    }
+    
+.footer ul li {
+    display: inline;
+    }
+    
+.icones-end {
+    position: absolute;
+    top: 10vh;
+    text-align: left;
+    font-family: "MyriadPro";
+    font-size: 20px;
+    color:white;
+    text-decoration: none;
+    padding: 5px;
+    }
+
+.contactme {
+    position: absolute;
+    top: 10vh;
+    left: 20vw;
+    text-align: right;
+    font-family: "MyriadPro";
+    font-size: 20px;
+    color:white;
+    text-decoration: none;
+    padding: 5px;
+    }
+
+.footer-2 {
+    display: block;
+    position: absolute;
+    top: 295vh;
+    bottom:0;
+    left:0;
+    padding: 10px;
+    width: 100%;
+    height: 10vh;
+    color: #354356;
+    background-color: #EFBAC0;
+    }
