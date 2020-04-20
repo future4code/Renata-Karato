@@ -4,9 +4,18 @@
   *
   **/
 
+@font-face {
+    font-family: "Roboto", sans-serif;
+    src: url("https://fonts.google.com/specimen/Roboto?query=roboto&sidebar.open&selection.family=Roboto")
+}
+
 * {
     margin: 0;
     padding: 0;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
 }
 
 h2 {
@@ -142,13 +151,6 @@ td button {
 }
 
 .search {
-    border-bottom: 2px solid;
-    border-top: none;
-    border-right: none;
-    border-left: none;
-}
-
-.search:active {
     border-bottom: 2px solid;
     border-top: none;
     border-right: none;
