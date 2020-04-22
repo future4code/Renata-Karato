@@ -1,0 +1,205 @@
+/** 
+  *
+  *  ESTILOS GERAIS 
+  *
+  **/
+
+@font-face {
+    font-family: "Roboto", sans-serif;
+    src: url("https://fonts.google.com/specimen/Roboto?query=roboto&sidebar.open&selection.family=Roboto")
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+}
+
+h2 {
+    background-color: #fe7e02;
+    padding: 10px 5px 10px 5px;
+    color: white;
+    text-align: center;
+}
+
+input {
+    height: 20px;
+    width: 500px;
+}
+
+button:focus {
+    color: white;
+}
+
+img {
+    width: 100px;
+    
+}
+
+div>p:first-child {
+    display: inline;
+}
+
+ol {
+    display: inline-block;
+
+}
+
+div img {
+    background: white;
+    }
+
+.camiseta {
+    width: 80px;
+    height: auto;
+}
+
+.chinelo {
+    width:80px;
+    height: auto;
+}
+
+.botao-amarelo {
+    background-color: #ffaf43;
+    width: 250px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 20px;
+    color: white; 
+}
+
+.botao-comprar {
+    position: absolute;
+    right: 60%;
+    left: 40%;
+    top: 300px;
+}
+
+.botao-amarelo:hover {
+    background-color: #c44f00;
+}
+
+.container {
+    height: 500px;
+    text-align: center;
+    position: relative;
+    width: 100%;
+}
+
+.icone {
+    height: 20px;
+    width: 20px;  
+}
+
+.icone:hover {
+    background-color: grey;
+    opacity: 0.8;
+}
+
+/** 
+  *
+  *  ESTILOS HOME 
+  *
+  **/
+
+#container-de-descricao {
+    background-color: #2274a5;
+    color: white;
+    padding-top: 30px;
+}
+
+#container-de-descricao>ol {
+    padding: 15px 0px;
+}
+
+#container-para-comprar {
+    background-color: #e7eb90;
+    width: 100%;
+    position: relative;
+}
+
+#container-para-comprar>p {
+    color: #c44f00;
+    padding: 100px 0;
+    font-size: 60px;
+    position: relative;
+    width: 100%;
+    top: 120px;
+}
+
+
+/**
+  *
+  *  ESTILOS COMPRAR 
+  *
+  **/
+
+div:nth-child(2),
+div:last-child {
+    text-align: center;
+}
+
+table {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+td {
+    text-align: center;
+}
+
+td button {
+    background-color: #fadf63;
+    width: 150px;
+    height: 30px;
+    border-radius: 5px;
+    color: black;
+}
+
+.button-buy:active {
+    color: white;
+}
+
+.button-buy:hover {
+    background-color: #face09;
+}
+
+.container-do-search {
+    margin-top: 20px;
+    height: 100px;
+}
+
+.search {
+    border-bottom: 2px solid;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+}
+
+.end-button {
+    position: relative;
+    width: 100%;
+}
+
+#back-button {
+    position: absolute;
+    background-color: white;
+    width: 100px;
+    height: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size: 10px;
+    color: black;
+    left: 45%;
+    right: 55%;
+    top: 80px;
+}
+
+#back-button:hover {
+    background-color: #635a3d
+}
