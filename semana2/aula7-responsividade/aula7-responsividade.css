@@ -1,0 +1,141 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.container > * {
+    flex: 1 100%;
+}
+
+.container {
+    border: 1px solid black;
+    max-width: 60vw;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.header {
+    width: 60vw;
+    height: 10vh;
+    background-color: red;
+}
+
+.item {
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-1 {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+    margin: 1%;
+}
+
+#item-1 {
+    background-color: blue;
+    width: 18vw;
+    height: 12vh;
+}
+
+#item-2 {
+    background-color: yellow;
+    width: 18vw;
+    height: 12vh;
+}
+
+#item-3 {
+    background-color: green;
+    width: 18vw;
+    height: 12vh;
+}
+
+#item-4 {
+    background-color: blue;
+    width: 18vw;
+    height: 12vh;
+}
+
+#item-5 {
+    background-color: yellow;
+    width: 18vw;
+    height: 12vh;
+}
+
+#item-6 {
+    background-color: green;
+    width: 18vw;
+    height: 12vh;
+}
+
+#item-7 {
+    background-color: black;
+    width: 28vw;
+    height: 40vh;
+    color: white;
+}
+
+#item-8 {
+    background-color: black;
+    width: 28vw;
+    height: 40vh;
+    color: white;
+}
+
+#item-9 {
+    background-color: white;
+    width: 18vw;
+    height: 12vh;
+}
+
+#item-10 {
+    background-color: white;
+    width: 18vw;
+    height: 12vh;
+}
+
+#item-11 {
+    background-color: white;
+    width: 18vw;
+    height: 12vh;
+}
+
+@media screen and (min-width:768px) and (max-width:1024px) {
+    .container-1 {
+        max-height: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: center;
+        margin: 2%;
+    }
+    
+    #item-3 {
+        background-color: green;
+        width: 40vw;
+        height: 12vh;
+    }
+
+    #item-6 {
+        background-color: green;
+        width: 36vw;
+        height: 12vh;
+    }
+
+    #item-11 {
+        background-color: white;
+        width: 36vw;
+        height: 12vh;
+    }
+}
+
+@media screen and (min-width:375px) and (max-width:812px) {
+    
+}
