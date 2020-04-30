@@ -25,10 +25,30 @@ console.log(novaLista) //valor impresso: [10, 15, 25, 30]
 //valor impresso se numero = 3 [12, 15, 18, 21, 27, 30] -> são os núeros divisíveis por 3
 //valor impresso se numero = 4 [12] -> somente ele é divisível por 4
 
+//DESAFIO 1
+// valor impresso para quantidadeTotal=4:
+//0
+//00
+//000
+//0000
+
+const quantidadeTotal = Number(prompt("Digite a quantidade de linhas: "))
+let quantidadeAtual = 0 //quantidade atual de linhas=0
+while(quantidadeAtual < quantidadeTotal){ //enquanto a quantidade atual for menor que a quantidade total
+  let linha = "" //será vazio
+  for(let asteriscos = 0; asteriscos < quantidadeAtual + 1; asteriscos++){
+    linha += "0" //linha = linha + 0
+  }
+  console.log(linha)
+  quantidadeAtual++
+}
+
 // EXERCÍCIOS DE ESCRITA DE CÓDIGO
 
 //EXERCÍCIO 3
+
 const arrayOriginal = [60, 25, 50, 140, 96, 22, 33, 110, 40, 180, 165, 170]
+
 
 //Resposta a.
 //"O maior numero é 180 e o menor é 22."
@@ -50,13 +70,11 @@ console.log("O maior número é", maiorNumero, "e o menor é", menorNumero, ".")
 
 //Resposta b.
 const newArray = []
+const divisao = 10
 
-for (let i = 0; i < arrayOriginal.length; i++) {
-    if (arrayOriginal%10 !== 0) {
-    newArray.push (i)
+for (const item of arrayOriginal) {
+    newArray.push(item/divisao)
 }
-}
-
 console.log (newArray)
 
 
