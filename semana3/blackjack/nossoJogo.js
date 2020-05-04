@@ -23,4 +23,4 @@ if ((pontuacaoUsuario > pontuacaoComputador) && pontuacaoUsuario <=21) { // cond
       console.log ("O computador ganhou!") //aparecerá a mensagem que o computador ganhou
    } else if (pontuacaoUsuario === pontuacaoComputador) { // condição se pontuação do usuário for igual a pontuação do computador
       console.log ("Empate!") // aparecerá a mensagem de empate
-   }
+   } 
