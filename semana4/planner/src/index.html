@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="index.js" defer></script>
+    <link href="index.css" type="text/css" rel="stylesheet" />
+    <title>Planner Semanal</title>
+  </head>
+
+  <body>
+
+    <header>
+      <h1 class="titulo">PLANNER SEMANAL</h1>
+      <div class="meu-input">
+        <p>Qual é a Tarefa?</p>
+        <input id="novaTarefa" type="text" placeholder="Escreva aqui...">
+        <select class="diaDaSemana" id="diaDaSemana">
+          <option disabled selected>Quando?</option>
+          <option value="paraFazer">Coisas Para Fazer</option>
+          <option value="segunda">Segunda-Feira</option>
+          <option value="terca">Terça-Feira</option>
+          <option value="quarta">Quarta-Feira</option>
+          <option value="quinta">Quinta-Feira</option>
+          <option value="sexta">Sexta-Feira</option>
+          <option value="sabado">Sábado</option>
+          <option value="domingo">Domingo</option>
+        <select>
+        <button class="addTarefa" onclick="adicionaTarefa ()">Criar Tarefa!</button>
+      </div>
+    </header>
+    <main>
+
+      <section class="box-1">
+        <div id="paraFazer" class="mini-box">
+          COISAS PARA FAZER
+          <ul class="conteudo"></ul>
+        </div>
+
+        <div id="segunda" class="mini-box">
+          SEGUNDA-FEIRA
+          <ul class="conteudo"></ul>
+        </div>
+
+        <div id="terca" class="mini-box">
+          TERÇA-FEIRA
+          <ul class="conteudo"></ul>
+        </div>
+
+        <div id="quarta" class="mini-box">
+          QUARTA-FEIRA
+          <ul class="conteudo"></ul>
+        </div>
+      </section>
+
+      <section class="box-2">
+        <div id="quinta" class="mini-box">
+          QUINTA-FEIRA
+          <ul class="conteudo"></ul>
+        </div>
+
+        <div id="sexta" class="mini-box">
+          SEXTA-FEIRA
+          <ul class="conteudo"></ul>
+        </div>
+
+        <div id="sabado" class="mini-box">
+          SÁBADO
+          <ul class="conteudo"></ul>
+        </div>
+
+        <div id="domingo" class="mini-box">
+          DOMINGO
+          <ul class="conteudo"></ul>
+        </div>
+      </section>
+
+    </main>
+  </body>
+</html>
