@@ -85,7 +85,7 @@ function idadeCachorro (anosHumanos) {
 
 idadeCachorro (5)  //retorna valor 35, pois 5x7=35
 
-//4.b.
+/* //4.b.
 function infoPessoa (nome, idade, endereço, estudante) {
     let nome = " "
     let idade = 0
@@ -103,4 +103,29 @@ return console.log ("Eu sou", nome, "tenho", idade, "anos, moro em", endereço, 
 let arrayDeSeculos = ["X", "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX", "XXI"]
 
 const qualSeculo = () => 
-console.log ("O ano", ano, "pertence ao seculo", século)
+console.log ("O ano", ano, "pertence ao seculo", século) */
+
+//EXERCÍCIO 6
+const array = [10, 23, 45, 78, 90, 52, 35, 67, 84, 22]
+
+//6.a.
+function elementosArray (array) {
+  for (let elementos of array) {
+   return array.length
+  }
+}
+
+console.log(array.length)
+
+//6.b.
+function parOuImpar (item) {
+  if (item%2===0){
+    console.log("O número", item, "é par")
+  } else {
+    console.log("O número", item, "é ímpar")
+  }
+}
+
+console.log(array(item))
+
+  //6.c.
