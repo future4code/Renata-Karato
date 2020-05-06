@@ -1,0 +1,113 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+}
+
+header {
+    display: flex;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 10vh;
+    top: 0;
+    background-color: chartreuse;
+}
+
+.titulo {
+    display: flex;
+    position: fixed;
+    align-items: center;
+    left: 5vw;
+}
+
+p:first-child {
+    font-size: 18px;
+    padding: 10px;
+}
+
+.meu-input {
+    display: flex;
+    position: fixed;
+    flex-wrap: nowrap;
+    align-items: center;
+    right: 5vw;
+}
+
+input {
+    margin: 0;
+    border: none;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.diaDaSemana {
+    padding: 10px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.addTarefa {
+    padding: 10px;
+    text-align: center;
+    font-size: 14px;
+}
+
+ul {
+    margin: 0;
+    padding: 5px;
+}
+
+ul li {
+    cursor:pointer;
+    background: grey;
+}
+
+ul li:hover {
+background-color: black;
+}
+
+ul li.checked {
+    background-color: #888;
+    color: #fff;
+    text-decoration: line-through;
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    flex-wrap: wrap;
+    width: 90vw;
+    height: 80vh;
+    top: 15vh;
+    right: 5vw;
+    border: 1px solid black;
+}
+
+.box-1 {
+    display: flex;
+    position: fixed;
+    width: 90vw;
+    height:40vh;
+    top: 15vh;
+    background-color: tomato;
+}
+
+.box-2 {
+    display: flex;
+    position: fixed;
+    width: 90vw;
+    height:40vh;
+    top: 55vh;
+    background-color: tomato;
+}
+
+.mini-box {
+    width: 22.5vw;
+    height: 40vh;
+    border: 1px solid black;
+    text-align: center;
+}
