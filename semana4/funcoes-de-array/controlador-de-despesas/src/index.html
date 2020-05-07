@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="index.js" defer></script>
+    <link href="index.css" type="text/css" rel="stylesheet" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2> Cadastrador de Despesas </h2>
+    <h4> Cadastrar Despesa </h4>
+    <div>
+      <label for="valor"> Valor: </label>
+      <input type="text" id="valor">
+    </div>
+    <div>
+      <label for="tipoDeDespesa"> Tipo de Despesa (Casa, Transporte, Alimentação, Outros) </label>
+      <select id="tipoDeDespesa">
+        <option> Casa </option>
+        <option> Transporte </option>
+        <option> Alimentação </option>
+        <option> Outros </option>
+      </select>
+    </div>
+    <div>
+      <label for="descricao"> Descrição </label>
+      <input type="text" id="descricao">
+    </div>
+    <div>
+      <button id="cadastrarDespesa" onclick="cadastrarDespesa()"> Cadastrar Despesa </button>
+    </div>
+
+    <h2> Despesas Detalhadas </h2>
+    <div>
+      <label for="despesaDetalhada"> Tipo de Despesa (Casa, Transporte, Alimentação, Outros) </label>
+      <select id="despesaDetalhada">
+        <option> Casa </option>
+        <option> Transporte </option>
+        <option> Alimentação </option>
+        <option> Outros </option>
+      </select>
+    </div>
+    <div>
+      <label for="valorMin"> Valor Mínimo: </label>
+      <input type="text" id="valorMin">
+    </div>
+    <div>
+      <label for="valorMax"> Valor Máximo: </label>
+      <input type="text" id="valorMax">
+    </div>
+    
+    <div id="despesaCadastrada"></div>    
+  </body>
+</html>
