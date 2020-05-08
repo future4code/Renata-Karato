@@ -122,3 +122,49 @@ const paraDarHello = () => {
 }
 
 paraDarHello() */
+
+// EXERCÍCIOS DE OBJETOS
+
+/* 1. Objetos são estruturas onde é possível representar dados. Deve ser utilizado quando queremos detalhar um objeto com seus valores.
+Arrays são estruturas utilizadas para guardar e acessar mais de uma informação ao mesmo tempo. Array deve ser utilizado para guardarmos
+e acessarmos infos com mais facilidade */
+
+//2.
+
+function criaRetangulo (lado1, lado2) {
+    retangulo = {
+        largura: lado1,
+        altura: lado2,
+        perímetro: 2*(lado1+lado2),
+        área: lado1*lado2    
+    }
+}
+criaRetangulo(2,5)
+console.log (retangulo)
+
+//3. 
+const meuFilmeFavorito ={
+    titulo: "Intocáveis",
+    ano: 2012,
+    diretor: "Olivier Nakache",
+    atores: ["Osmar Sy", "François Cluzet", "Audrey Fleurot"]
+}
+
+console.log (`Venha assistir ao filme ${meuFilmeFavorito.titulo}, de ${meuFilmeFavorito.ano}, dirigido por ${meuFilmeFavorito.diretor} e estrelado por ${meuFilmeFavorito.atores[0]}, ${meuFilmeFavorito.atores[1]} e ${meuFilmeFavorito.atores[2]}.`)
+
+//4.
+const pessoaQualquer = {
+    nome: "Renata",
+    idade: "31",
+    email: "rmkarato@gmail.com",
+    endereço: "São Caetano do Sul/SP"
+}
+console.log(pessoaQualquer)
+
+function anonimizarPessoa () {
+    const pessoaAnomina = {
+        ...pessoaQualquer,
+        nome: "ANÔNIMO"
+    }
+}
+console.log(anonimizarPessoa)
