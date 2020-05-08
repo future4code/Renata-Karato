@@ -104,3 +104,21 @@ if(numero2 % numero1 === 0) {
 // 5.ii. 
 let diferencaNumeros = numero1 - numero2
 console.log (`A diferença entre eles é ${diferencaNumeros*-1}`)
+
+// EXERCÍCIOS DE FUNÇÕES
+
+// 1. 
+numeros = [5, 8, 23, 10, 68, 11, 13, 15, 20, 2, 42, 25, 30, 33, 50, 58]
+
+/* const segundoMaiorNumero = numeros.forEach ((numero, index, array) => {
+    if(numero )
+})
+ */
+
+/* //2.
+
+const paraDarHello = () => {
+    alert ("Hello, Labenu!")
+}
+
+paraDarHello() */
