@@ -39,3 +39,68 @@ Se numero for maior que o numero2(que é igual 0), então numero2 será igual ao
 console.log(numero1) - como infinity agrega apenas numeros positivos, então será impresso no console o -10 
 console.log(numero2) - resultado, 1590, pois é maior que 0 e é o maior numero do array*/
 
+// EXERCÍCIOS DE LÓGICA DE PROGRAMAÇÃO
+
+/* 1. */
+
+/* 
+2.A. false
+2.B. false
+2.C. true
+2.D. true
+2.E. true */
+
+/* 3. 
+const quantidadeDeNumerosPares
+let i = 0
+while(i <= quantidadeDeNumerosPares) {
+  console.log(i*2)
+}
+
+O código não funciona, pq a primeira const quantidadeDeNumerosPares não tem valor declarado
+
+let arrayDeNumerosPares = [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
+let quantidadeDeNumerosPares = 5
+let i = 0
+
+while (i <= arrayDeNumerosPares.length) {
+    console.log(arrayDeNumerosPares[i])
+    i++
+} */
+  
+// 4. 
+let valorA = 10
+let valorB = 10
+let valorC = 10
+
+if (valorA===valorB && valorB===valorC)  {
+    console.log ("O triângulo é equilátero!") 
+} else if (valorA !== valorB && valorB !== valorC && valorC !==valorA) {
+    console.log ("O triângulo é escaleno!") 
+} else {
+    console.log ("O triângulo é isósceles!")
+}
+    
+//5.
+let numero1 = 15
+let numero2 = 30
+
+//5.i.
+if (numero1 > numero2) {
+    console.log (`O maior é: ${numero1}`)
+} console.log (`O maior é: ${numero2}`)
+
+// 5.ii.
+let resultado = numero1 / numero2
+if(numero1 % numero2 === 0) {
+    console.log (`${numero1} é divisível por ${numero2}`)
+} console.log (`${numero1} não é divisível por ${numero2}`)
+
+if(numero2 % numero1 === 0) {
+    console.log (`${numero2} é divisível por ${numero1}`)
+} else {
+    console.log (`${numero2} não é divisível por ${numero1}`)}
+
+// 5.ii. 
+let diferencaNumeros = numero1 - numero2
+console.log (`A diferença entre eles é ${diferencaNumeros*-1}`)
