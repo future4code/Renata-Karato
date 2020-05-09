@@ -41,7 +41,23 @@ console.log(numero2) - resultado, 1590, pois é maior que 0 e é o maior numero 
 
 // EXERCÍCIOS DE LÓGICA DE PROGRAMAÇÃO
 
-/* 1. */
+// 1. 
+let notas = [9, 10, 7, 8, 6]
+let i = 0
+
+//percorrendo notas com for
+for (let i=0; i<notas.length; i++) {
+    console.log(notas[i])
+}
+
+//percorrendo notas com while
+while (i<notas.length) {
+    console.log(notas[i]) 
+    i++
+}
+
+//pegam um item do array de index 2
+console.log(notas[2])
 
 /* 
 2.A. false
@@ -50,23 +66,23 @@ console.log(numero2) - resultado, 1590, pois é maior que 0 e é o maior numero 
 2.D. true
 2.E. true */
 
-/* 3. 
-const quantidadeDeNumerosPares
+// 3. 
+
+/* const quantidadeDeNumerosPares
 let i = 0
 while(i <= quantidadeDeNumerosPares) {
   console.log(i*2)
-}
-
-O código não funciona, pq a primeira const quantidadeDeNumerosPares não tem valor declarado
-
-let arrayDeNumerosPares = [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
-let quantidadeDeNumerosPares = 5
-let i = 0
-
-while (i <= arrayDeNumerosPares.length) {
-    console.log(arrayDeNumerosPares[i])
-    i++
 } */
+
+//O código acima não funciona, pq a primeira const quantidadeDeNumerosPares não tem valor declarado
+
+function quantidadeDeNumerosPares (numeroN) {
+    let i=0
+    while (i < numeroN) {
+        console.log(2*i -1)
+    }
+}
+console.log(quantidadeDeNumerosPares)
   
 // 4. 
 let valorA = 10
@@ -162,9 +178,136 @@ const pessoaQualquer = {
 console.log(pessoaQualquer)
 
 function anonimizarPessoa () {
-    const pessoaAnomina = {
+    const pessoaAnonima = {
         ...pessoaQualquer,
         nome: "ANÔNIMO"
     }
+    return pessoaAnonima
 }
-console.log(anonimizarPessoa)
+
+console.log(anonimizarPessoa())
+
+//EXERCÍCIOS DE FUNÇÕES DE ARRAY
+
+const people = [
+	{ nome: "Pedro", idade: 20 },
+	{ nome: "João", idade: 10 },
+	{ nome: "Paula", idade: 12 },
+	{ nome: "Artur", idade: 89 } 
+]
+
+//1.A.
+const adultos = people.filter ((pessoa, index, pessoas) => {
+    if (pessoa.idade >= 20) {
+        return true
+    }
+    return false
+    })
+console.log(adultos)
+
+//1.B.
+const criancasEAdolescentes = people.filter ((pessoa, index, pessoas) => {
+    if (pessoa.idade < 20) {
+        return true
+    }
+    return false
+    })
+console.log(criancasEAdolescentes)
+
+const array = [1, 2, 3, 4, 5, 6]
+
+//2.a.
+const dobroArray = array.map ((numero, index, array) => {
+    return numero*2
+})
+console.log(dobroArray)
+
+//2.b. 
+const triploArray = array.map((numero, index, array) => {
+    return String(numero*3)
+})
+console.log(triploArray)
+
+//2.c.
+const paridadeArray = array.filter ((numero, index, array) => {
+    if (numero % 2 === 0) {
+        console.log (`${numero} é par`)
+    } else if (numero % 2 !== 0) {
+        console.log (`${numero} é impar`)
+    }
+})
+
+const pessoas = [
+	{ nome: "Paula", idade: 12, altura: 1.8},
+	{ nome: "João", idade: 20, altura: 1.3},
+	{ nome: "Pedro", idade: 15, altura: 1.9},
+	{ nome: "Luciano", idade: 22, altura: 1.8},
+	{ nome: "Artur", idade: 10, altura: 1.2},
+	{ nome: "Soter", idade: 70, altura: 1.9}
+]
+
+//3.a. 
+const quemPodeIr = pessoas.filter ((pessoa, index, pessoas) => {
+    if (pessoa.idade > 14 && pessoa.idade < 60 && pessoa.altura > 1.50) {
+        return true
+    }
+    return false
+}) 
+console.log (quemPodeIr)
+
+//3.b.
+const naoPodeIr = pessoas.filter((pessoa, index, pessoas) => {
+    if (pessoa.idade < 14 || pessoa.idade > 60 || pessoa.altura < 1.50) {
+        return true
+    }
+    return false
+})
+console.log (naoPodeIr)
+
+const consultas = [
+	{ nome: "João", genero: "masculino", cancelada: true, dataDaConsulta: "01/10/2019" },
+	{ nome: "Pedro", genero: "masculino", cancelada: false, dataDaConsulta: "02/10/2019" },
+	{ nome: "Paula", genero: "feminino", cancelada: true, dataDaConsulta: "03/11/2019" },
+	{ nome: "Márcia", genero: "feminino", cancelada: false, dataDaConsulta: "04/11/2019" }
+]
+
+//4.
+
+const generoPessoa = consultas.map ((consulta, index, consultas) => {
+    if(consulta.genero === "masculino") {
+        return `Sr.`
+    } 
+    return `Sra.`
+    
+})
+
+const generoLembrar = consultas.map ((consulta, index, consultas) => {
+    if(consulta.genero === "masculino") {
+        return `lembrá-lo`
+    } 
+    return `lembrá-la`
+}) 
+
+const confirmarConsultas = consultas.map((consulta, index, consultas) => {
+    if (consulta.cancelada === true) {
+        return `Olá, ${generoPessoa[index]} ${consulta.nome}. Infelizmente, sua consulta marcada para o dia ${consulta.dataDaConsulta} foi cancelada. Se quiser, pode entrar em contato conosco para remarcá-la.`
+    } else {
+        return `Olá, ${generoPessoa[index]} ${consulta.nome}. Estamos enviando esta mensagem para ${generoLembrar[index]} da sua consulta no dia ${consulta.dataDaConsulta}. Por favor, acuse o recebimento deste e-mail.`
+    }
+    })
+    console.log(confirmarConsultas)
+
+const contas = [
+    { cliente: "João", saldoTotal: 1000, compras: [100, 200, 300] },
+    { cliente: "Paula", saldoTotal: 7500, compras: [200, 1040] },
+    { cliente: "Pedro", saldoTotal: 10000, compras: [5140, 6100, 100, 2000] },
+    { cliente: "Luciano", saldoTotal: 100, compras: [100, 200, 1700] },
+    { cliente: "Artur", saldoTotal: 1800, compras: [200, 300] },
+    { cliente: "Soter", saldoTotal: 1200, compras: [] }
+    ]
+
+//5.
+contas.forEach ((conta, index, array) => {
+    contas.saldoTotal
+})
+console.log(contas)
