@@ -76,17 +76,17 @@ while(i <= quantidadeDeNumerosPares) {
 
 //O código acima não funciona, pq a primeira const quantidadeDeNumerosPares não tem valor declarado
 
-function quantidadeDeNumerosPares (numeroN) {
-    let i=0
-    while (i < numeroN) {
-        console.log(2*i -1)
+function calculaNumerosPares (numeroN) {
+    let quantidadeDeNumerosPares=0
+    for (let j=0; j<=quantidadeDeNumerosPares; j++) {
+        quantidadeDeNumerosPares += quantidadeDeNumerosPares[j*2]
     }
 }
-console.log(quantidadeDeNumerosPares)
-  
+console.log(calculaNumerosPares(numeroN=3))
+
 // 4. 
 let valorA = 10
-let valorB = 10
+let valorB = 10 
 let valorC = 10
 
 if (valorA===valorB && valorB===valorC)  {
@@ -126,10 +126,15 @@ console.log (`A diferença entre eles é ${diferencaNumeros*-1}`)
 // 1. 
 numeros = [5, 8, 23, 10, 68, 11, 13, 15, 20, 2, 42, 25, 30, 33, 50, 58]
 
-/* const segundoMaiorNumero = numeros.forEach ((numero, index, array) => {
-    if(numero )
+let ordemCrescente = numeros.sort((a,b) => {
+    return a - b
 })
- */
+console.log(`O segundo menor número é ${ordemCrescente[1]}`)
+
+let ordemDecrescente = numeros.sort((a, b) => {
+    return b - a
+})
+console.log(`O segundo maior número é ${ordemDecrescente[1]}`)
 
 /* //2.
 
@@ -305,9 +310,18 @@ const contas = [
     { cliente: "Artur", saldoTotal: 1800, compras: [200, 300] },
     { cliente: "Soter", saldoTotal: 1200, compras: [] }
     ]
+    console.log(contas)
 
 //5.
-contas.forEach ((conta, index, array) => {
-    contas.saldoTotal
+//PARAa atualizar saldototal
+/* const atualizaTotal = contas.reduce (getTotal, 0)
+function getTotal (atualizaTotal, conta) {
+    return atualizaTotal + (conta.saldoTotal - conta.compras)
+}
+console.log(atualizaTotal)
+ */
+const arrayCompras = contas.forEach ((conta, index, array) => {
+    console.log (conta.compras)
 })
-console.log(contas)
+
+//NÃO CONSEGUI RESOLVER - depcionada :(
