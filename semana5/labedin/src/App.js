@@ -7,10 +7,17 @@ import CardHabilidades from './components/CardHabilidades/CardHabilidades'
 import ImagemProfile from './imgs/profile-renata.jpg'
 import ImagemExperiencia1 from './imgs/missemota.jpg'
 import ImagemExperiencia2 from './imgs/GAE.png'
+import ImagemHeader from './imgs/img-start.jpg'
 
 function App() {
   return (
     <div className="App">
+      <div className="headerPhoto">
+        <img src = {ImagemHeader} alt="Churaumi Aquarium" className="img-start"/>
+        <div clasName="overlay">
+            <div className="text-inicio"> - SONHAR, VIVER E TODO DIA AGRADECER! - </div>
+        </div>
+      </div>
       <div className="page-section-container">
         <h2>Dados pessoais</h2>
         <CardGrande
@@ -63,7 +70,16 @@ function App() {
 
       <div className="page-section-container">
         <h2>Skills</h2>
-        <CardHabilidades />
+        <CardHabilidades
+        texto={["Desenvolvimento front-end / back-end", "Linguagem HTML CSS", "JavaScript + Terminal + GiHub", "Graphic Design: Photoshop / CorelDraw / InDesign", "Architectural Design: AutoCAD / Revit Architecture / Sketchup"]}
+        />
+      </div>
+
+      <div className="page-section-container">
+        <h2>Principais Características</h2>
+        <CardHabilidades
+        texto={["Dedicada e Focada", "Responsável e Organizada", "Empática e Prática", "Facilidade de Aprendizado"]}
+        />
       </div>
 
       <div className="page-section-container">

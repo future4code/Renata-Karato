@@ -8,12 +8,28 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 30px;
+  
 }
+
+.img-start {
+  display: fixed;
+  top: 0;
+  width: 100vw;
+}
+
+.text-inicio {
+  color: white;
+  font-size: 32px;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  }
 
 .page-section-container {
   width: 40vw;
-  margin: 10px 0;
+  margin: 15px 0;
 }
 
 .page-section-container > h3 {

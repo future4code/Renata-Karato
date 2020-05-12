@@ -1,15 +1,14 @@
 import React from 'react';
-import {ItensHabilidades} from './ItensHabilidades'
 import './CardHabilidades.css'
 
-function CardHabilidades() {
+function CardHabilidades(props) {
     return (
         <div className="habilidades-container">         
             <ul>
-                <ItensHabilidades texto={"Desenvolvimento front-end / back-end"} />
-                <ItensHabilidades texto={"Linguagem HTML/CSS"} />
-                <ItensHabilidades texto={"Graphic Design: Photoshop / CorelDraw / InDesign"} />
-                <ItensHabilidades texto={"Architectural Design: AutoCAD / Revut Architecture / Sketchup"} />
+            <li> {props.texto[0]} </li>
+            <li> {props.texto[1]} </li>
+            <li> {props.texto[2]} </li>
+            <li> {props.texto[3]} </li>
             </ul>
         </div>
     )
