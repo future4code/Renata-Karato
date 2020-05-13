@@ -1,7 +1,7 @@
-/* import React, {Component} from 'react'
+/* import React from 'react'
 import './SecaoComentario.css'
 
-export class SecaoComentario extends Component {
+export class SecaoComentario extends React.Component {
 	state = {
 		comentario: ""
 	}
@@ -15,12 +15,12 @@ export class SecaoComentario extends Component {
 	render() {
 		return <div className={'comment-container'}>
 			<input
-				className={'input-comentario'}
-				placeholder={'Comentário'}
+				className='input-comentario'
+				placeholder='Comentário'
 				value={this.state.comentario}
 				onChange={this.onChangeComentario}
 			/>
-			<button onClick={this.aoEnviarComentario}>Enviar</button>
+			<button onClick={this.props.aoEnviar}>Enviar</button>
 		</div>
 	}
 } */
