@@ -1,0 +1,15 @@
+.habilidades-container {
+    display: flex;
+    align-items: center;
+    border: 1px solid black;
+    padding: 20px 10px;
+    margin-bottom: 10px;
+    height: 200px;
+}
+
+.habilidades-container ul {
+    list-style-type: square;
+}
+.habilidades-container li {
+    margin-left: 20px;
+}
