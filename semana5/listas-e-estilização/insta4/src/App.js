@@ -57,7 +57,7 @@ class App extends React.Component {
     valorInputFotoPost: ""
   };
 
-  adicionaPost = () => {
+   adicionaPost = () => {
     const novoPost = {
       nomeDeUsuario: this.state.valorInputUsuario,
       fotoDeUsuario: this.state.valorInputFotoUsuario,
@@ -113,14 +113,14 @@ class App extends React.Component {
            <label>Foto do usuário:</label>
             <InputStyle value={this.state.valorInputFotoUsuario}
             onChange={this.onChangeInputFotoUsuario}
-            placeholder={"Anexar aqui"}
+            placeholder={"URL da foto"}
             />
           </EntreInputs>
           <EntreInputs>
             <label>Foto para postar:</label>
             <InputStyle value={this.state.valorInputFotoPost}
             onChange={this.onChangeInputFotoPost}
-            placeholder={"Anexar aqui"}
+            placeholder={"URL da imagem"}
             />
           </EntreInputs>
             <BotaoPostar onClick={this.adicionaPost}>Postar!</BotaoPostar>

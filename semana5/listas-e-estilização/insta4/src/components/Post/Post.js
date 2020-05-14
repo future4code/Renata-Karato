@@ -19,7 +19,7 @@ class Post extends React.Component {
     iconeCurtida: iconeCoracaoBranco,
     comentario: "",
     favoritado:false,
-    iconeFavorito: iconeFavoritoBranco
+    iconeFavorito: iconeFavoritoBranco,
   }
 
   //quando clica em curtir
@@ -64,11 +64,17 @@ class Post extends React.Component {
 
     //quando alguém posta um comentário e o número muda
     aoEnviarComentario = () => {
+      const novoComentario = {
+        comentario: this.state.comentario
+      };
+
+      const novosComentarios = [...this.state.comentario, novoComentario];
       console.log(this.state.comentario)  
+
       this.setState({
+        comentario: novosComentarios, 
         comentando: false,
         numeroComentarios: this.state.numeroComentarios + 1,
-        comentario: ""
       })
     }
 
@@ -114,7 +120,7 @@ class Post extends React.Component {
           valorContador={this.state.numeroComentarios} //contador de comentários muda para =1
         />
       </div>
-			{componenteComentario}      
+			{componenteComentario}  
     </div>
   }
 }
