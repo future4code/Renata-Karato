@@ -1,26 +1,24 @@
 import React from "react";
+import PerguntaAberta from "../components/PerguntaAberta";
+import PerguntaOpcoes from "../components/PerguntaOpcoes";
 
 class Pagina1 extends React.Component {
   render() {
     return (
       <div>
         <h3>ETAPA 1 - DADOS GERAIS</h3>
-        <p>1. Qual o seu nome?</p>
-        <input />
-        <p>2. Qual sua idade?</p>
-        <input />
-        <p>3. Qual seu e-mail?</p>
-        <input />
-        <p>4. Qual a sua escolaridade?</p>
-        <p>
-          <select>
-            <option>Ensino médio incompleto</option>
-            <option>Ensino médio completo</option>
-            <option>Ensino superior incompleto</option>
-            <option>Ensino superior completo</option>
-          </select>
-        </p>
-        <button onClick={this.props.proximaEtapa}>Próxima etapa</button>
+        <PerguntaAberta pergunta={"1. Qual o seu nome?"} />
+        <PerguntaAberta pergunta={"2. Qual sua idade?"} />
+        <PerguntaAberta pergunta={"3. Qual seu e-mail?"} />
+        <PerguntaOpcoes
+          pergunta={"4. Qual a sua escolaridade?"}
+          respostas={[
+            "Ensino Médio Incompleto",
+            "Ensino Médio Completo",
+            "Ensino Superior Incompleto",
+            "Ensino Superior Completo"
+          ]}
+        />
       </div>
     );
   }

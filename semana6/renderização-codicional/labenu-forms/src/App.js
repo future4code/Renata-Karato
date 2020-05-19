@@ -1,7 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+import "./index.css";
+
 import Pagina1 from "./components/Pagina1";
 import Pagina2 from "./components/Pagina2";
+import Pagina3 from "./components/Pagina3";
+import PaginaFinal from "./components/PaginaFinal";
 
 const AppContainer = styled.div`
   font-family: sans-serif;
@@ -10,27 +14,37 @@ const AppContainer = styled.div`
 
 class App extends React.Component {
   state = {
-    proximaEtapa: true
+    etapa: 1
   };
 
-  onClickProximaPagina = () => {
-    this.setState({ proximaEtapa: !this.state.proximaEtapa });
+  renderizaEtapa = () => {
+    switch (this.state.etapa) {
+      case 1:
+        return <Pagina1 />;
+      case 2:
+        return <Pagina2 />;
+      case 3:
+        return <Pagina3 />;
+      case 4:
+        return <PaginaFinal />;
+      default:
+        return <Pagina1 />;
+    }
+  };
+
+  onClickProximaEtapa = () => {
+    this.setState({ etapa: this.state.etapa + 1 });
   };
 
   render() {
-    if (this.state.proximaEtapa) {
-      return (
-        <AppContainer>
-          <Pagina1 proximaEtapa={this.onClickProximaPagina} />
-        </AppContainer>
-      );
-    } else {
-      return (
-        <AppContainer>
-          <Pagina2 proximaEtapa={this.onClickProximaPagina} />
-        </AppContainer>
-      );
-    }
+    return (
+      <AppContainer>
+        {this.renderizaEtapa()}
+        {this.state.etapa !== 4 && (
+          <button onClick={this.onClickProximaEtapa}>Próxima etapa </button>
+        )}
+      </AppContainer>
+    );
   }
 }
 

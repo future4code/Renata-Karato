@@ -1,13 +1,14 @@
 import React from "react";
 
-class PerguntaAberta extends React.Component {
-  render() {
-    return (
-      <div>
-        
-      </div>
-    );
-  }
+function PerguntaAberta(props) {
+  return (
+    <div>
+      <p>{props.pergunta}</p>
+      <p>
+        <input onChange={props.onChange} value={props.value} />
+      </p>
+    </div>
+  );
 }
 
 export default PerguntaAberta;

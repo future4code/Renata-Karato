@@ -1,36 +1,15 @@
 import React from "react";
-import Pagina3 from "../components/Pagina3"
+import PerguntaAberta from "../components/PerguntaAberta";
 
 class Pagina2 extends React.Component {
-  state = {
-    proximaEtapa: true
-  };
-
-  onClickProximaPagina = () => {
-    this.setState({ proximaEtapa: !this.state.proximaEtapa });
-  };
-
   render() {
-    if (this.state.proximaEtapa) {
-      return (
-          <div>
-            <h3>ETAPA 2 - INFORMAÇÕES DO ENSINO SUPERIOR</h3>
-            <p>5. Qual curso?</p>
-            <input />
-            <p>6. Qual a unidade de ensino?</p>
-            <input />
-            <p>
-            <button onClick={this.onClickProximaPagina}>Próxima etapa</button>
-            </p>
-          </div>
-        );
-    } else {
-        return (
-          <div>
-            <Pagina3 proximaEtapa={this.onClickProximaPagina} />
-          </div>
-      );
-    }
+    return (
+      <div>
+        <h3>ETAPA 2 - INFORMAÇÕES DO ENSINO SUPERIOR</h3>
+        <PerguntaAberta pergunta={"5. Qual curso?"} />
+        <PerguntaAberta pergunta={"6. Qual a unidade de ensino?"} />
+      </div>
+    );
   }
 }
 
