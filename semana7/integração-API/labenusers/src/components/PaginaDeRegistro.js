@@ -2,76 +2,70 @@ import React from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 
+const axiosConfig = {
+    headers: {
+        Authorization: "renata-karato-mello"
+    }
+}
+
 class PaginaDeRegistro extends React.Component {
     state = {
-        nome: "",
+        name: "",
         email: "",
     };
 
-    reuneUsuarios = () => {
-        axios.get(
-            'https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users',
-            {
-                headers: 
-                {Authorization: "renata-karato-mello"}
-            }
-        ).then(resp => {
-            console.log(resp)
-        }).catch(err => {
-            console.log(err)
-        });
-    };
-
-       criaUsuario = () => {
+    criaUsuario = () => {
         const body = {
-            name: this.state.nome,
+            name: this.state.name,
             email: this.state.email,
         };
 
         axios.post(
-            'https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users', body, {
-                headers: 
-                {Authorization: "renata-karato-mello"}
-            }
-        ).then(resposta => {
-            console.log(resposta)
+            'https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users', body, axiosConfig 
+        ).then(() => {
+            alert("Usuário criado com sucesso!")
+            this.setState({name: "", email: ""})
         }).catch(erro => {
-            console.log(erro)
+            alert("Erro ao criar usuário!")
         })
     }
 
-    onChangeInputValueNome = event => {
-        this.setState({nome: event.target.value})
+    onChangeInputValueName = event => {
+        const newNameValue = event.target.value
+        this.setState({name: newNameValue})
     }
 
     onChangeInputValueEmail = event => {
-        this.setState({email: event.target.value})
+        const newEmailValue = event.target.value
+        this.setState({email: newEmailValue})
     }
 
     render () {
         return (
-        <div>
-            <div>
-                <button onClick={this.props.irParaPaginaDeLista}>Ir Para Página de Lista</button>
-            </div>
             <div>
                 <div>
-                    <label>Nome:</label>
-                    <input
-                    value={this.state.nome}
-                    onChange={this.onChangeInputValueNome}
-                    />
+                    <button onClick={this.props.irParaPaginaDeLista}>Ir Para Página de Lista</button>
                 </div>
                 <div>
-                    <label>E-mail:</label>
-                    <input
-                    value={this.state.email}
-                    onChange={this.onChangeInputValueEmail}
-                    />
+                    <div>
+                        <label>Nome:</label>
+                        <input
+                        type="text"
+                        value={this.state.name}
+                        onChange={this.onChangeInputValueName}
+                        />
+                    </div>
+                    <div>
+                        <label>E-mail:</label>
+                        <input
+                        type="email"
+                        value={this.state.email}
+                        onChange={this.onChangeInputValueEmail}
+                        />
+                    </div>
+                    <button onClick={this.criaUsuario}>Criar Usuário</button>
                 </div>
-                <button onClick={this.criaUsuario}>Salvar</button>
             </div>
-        </div>
         )
     }
 }
