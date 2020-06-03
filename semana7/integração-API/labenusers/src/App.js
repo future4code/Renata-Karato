@@ -1,32 +1,31 @@
 import React from 'react';
-import styled from 'styled-components';
 import './index.css';
 
-import PaginaDeRegistro from './components/PaginaDeRegistro'
-import PaginaDeLista from './components/PaginaDeLista'
+import RegisterUserPage from './components/RegisterUserPage'
+import UserListPage from './components/UserListPage'
 
 
 class App extends React.Component {
   state = {
-    irParaPaginaX: true,
+    goToPageX: true,
   }
 
-  onClickIrParaPaginaX = () => {
-    this.setState({irParaPaginaX: !this.state.irParaPaginaX})
+  onClickGoToPageX = () => {
+    this.setState({goToPageX: !this.state.goToPageX})
   }
  
 
   render () {
-    if (this.state.irParaPaginaX) {
+    if (this.state.goToPageX) {
       return (
         <div>
-          <PaginaDeRegistro irParaPaginaDeLista={this.onClickIrParaPaginaX}/>
+          <RegisterUserPage goToUserListPage={this.onClickGoToPageX}/>
         </div>
       );
     } else {
       return (
         <div>
-          <PaginaDeLista irParaPaginaDeRegistro={this.onClickIrParaPaginaX}/>
+          <UserListPage goToRegisterUserPage={this.onClickGoToPageX}/>
         </div>
       )
     }
