@@ -10,7 +10,12 @@ const axiosConfig = {
 
 class UserDetailsPage extends React.Component {
     state = {
-        completeList: []
+       userDetails: [],
+       id: "",
+    }
+
+    componentDidMount() {
+        this.getUserById(this.state.id)
     }
 
     getUserById = IdUser => {
@@ -20,13 +25,17 @@ class UserDetailsPage extends React.Component {
                 axiosConfig
             )
             .then(answ => {
-            this.setState({completeList: answ.data});
-        });
+            this.setState({userDetails: answ.data});
+        }).cath ((error) => {
+            alert("Não foi possível buscar usuário")
+        })
     };
 
     render () {
         return (
-           
+            <div>
+                <p>Oi!</p>
+            </div>
         )
     }
 }
