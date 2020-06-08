@@ -13,27 +13,24 @@ const Container = styled.div`
 
 class App extends React.Component {
   state = {
-    createPlaylistPage: true
+    currentPage: "createPlaylist"
   };
 
-onClickChangePage = () => {
-  this.setState({createPlaylistPage: !this.state.createPlaylistPage});
-};
+changePage = () => {
+  if (this.state.currentPage === "createPlaylist") {
+    this.setState({ currentPage: "listPlaylists"})
+  } else {
+    this.setState({ currentPage: "createPlaylist"})
+  }
+}
   
 render() {
-  if(this.state.createPlaylistPage) {
-    return (
-        <Container>
-          <CreatePlaylist changePage={this.onClickChangePage}/>
-        </Container>
+  return (
+    <Container>
+      {this.state.currentPage === "createPlaylist" ? <button onClick={this.changePage}> Ver Todas as Playlists</button> : <button onClick={this.changePage}> Criar Playlist </button>}
+      {this.state.currentPage === "createPlaylist" ? <CreatePlaylist /> : <AllPlaylistPage />}
+    </Container>
     );
-  } else {
-      return (
-        <Container>
-          <AllPlaylistPage changePage={this.onClickChangePage}/>
-        </Container>
-      );
-    }
   }
 }
 

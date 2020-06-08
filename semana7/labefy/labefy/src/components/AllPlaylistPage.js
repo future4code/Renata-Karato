@@ -2,18 +2,28 @@ import React from "react";
 import styled from "styled-components";
 import axios from "axios";
 
+import PlaylistsDetail from "./PlaylistsDetail"
+
 const Container = styled.div`
   font-family: sans-serif;
-  display: grid;
-  grid-template-columns: ${props => (props.viewTracks ? "2.5fr 1.5fr" : "4fr")};
+  text-align: center;
 `;
 
-const ListOrganize = styled.ul`
+const UlOrganize = styled.ul`
   list-style-type: none;
 `;
 
 const LiOrganize = styled.li`
   padding: 4px;
+`;
+
+const CursorSpan = styled.span`
+  cursor: pointer;
+
+  :hover {
+    color: blue;
+    border-bottom: 1px solid blue;
+  }
 `;
 
 const DeleteButton = styled.span`
@@ -32,7 +42,10 @@ class AllPlaylistPage extends React.Component {
     namesPlaylists: [],
     quantityPlaylists: "",
     viewTracks: false,
-    playlistTracks: []
+    playlistTracks: [],
+    currentPage: "listPlaylists",
+    playlistId: "",
+    playlistName: ""
   };
 
   componentDidMount() {
@@ -51,34 +64,57 @@ class AllPlaylistPage extends React.Component {
       });
   };
 
-  deletePlaylist = playlistId => {
-    axios
-      .delete(
-        `https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists/${playlistId}`,
-        axiosConfig
-      )
-      .then(() => {
-        this.getAllPlaylists();
-        this.confirmDelete();
-      })
-      .catch(err => {
-        alert("Ocorreu um erro ao apagar playlist");
-        console.log(err);
-      });
-  };
+  handlePlaylistNameChange = event => {
+    const newNamePlaylistValue = event.target.value;
 
-  confirmDelete = () => {
-    if (window.confirm("Tem certeza que deseja excluir este usuário?")) {
-      alert("Playlist apagada com sucesso!");
-    } else {
-      alert("Playlist não foi excluída!");
-    }
-  };
+    this.setState({ playlistName: newNamePlaylistValue})
+  }
 
-  getPlaylistTracks = playId => {
+  handleSearchPlaylist = () => {
     axios
       .get(
-        `https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists/${playId}/tracks`,
+        `https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists/search?name=${this.state.playlistName}`,
+        axiosConfig
+      )
+      .then(rere => {
+        this.setState({ namesPlaylists: rere.data.result.playlist})
+      })
+      .catch(errr => {
+        alert("Erro ao criar playlist")
+        console.log(errr)
+      })    
+  }
+
+  changePage = playlistId => {
+    if(this.state.currentPage === "listPlaylists") {
+      this.setState({ currentPage: "playlistDetail", playlistId: playlistId })
+    } else {
+      this.setState({ currentPage: "listPlaylists", playlistId: ""})
+    }
+  }
+
+  deletePlaylist = () => {
+    if (window.confirm("Tem certeza que deseja excluir esta playlist?")) {
+      axios
+        .delete(
+          `https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists/${this.state.playlistId}`,
+          axiosConfig
+        )
+        .then(() => {
+          this.getAllPlaylists();
+          alert("Playlist apagada com sucesso!");
+        })
+        .catch(err => {
+          alert("Playlist não foi excluída!");
+          console.log(err);
+        });
+      }
+    };
+
+  getPlaylistTracks = () => {
+    axios
+      .get(
+        `https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists/${this.state.playlistId}/tracks`,
         axiosConfig
       )
       .then(resp => {
@@ -94,45 +130,38 @@ class AllPlaylistPage extends React.Component {
 
   render() {
     return (
-        <Container viewTracks={this.state.viewTracks}>
-            <div>
-            <button onClick={this.props.changePage}>Criar Playlist</button>
-            <p>Você tem {this.state.quantityPlaylists} playlists criadas:</p>
-            <ListOrganize>
-                {this.state.namesPlaylists.length === 0 && (
-                <div>Carregando playlists...</div>
-                )}
-                {this.state.namesPlaylists.map(name => {
-                    return (
-                        <LiOrganize>
-                            {name.name}
-                        <DeleteButton onClick={() => this.deletePlaylist(name.id)}>
-                            <strong> X </strong>
-                        </DeleteButton>
-                        <button onClick={this.showTracks}>
-                            Ver Músicas
-                        </button>
-                        </LiOrganize>
-                    );
-                })}
-            </ListOrganize>
-            </div>
-            
-            <ListOrganize>
-                {this.state.viewTracks && this.state.playlistTracks.length === 0 && (
-                <div>Carregando músicas...</div>
-                )}
-                {this.state.playlistTracks.map(music => {
-                    return (
-                        <LiOrganize>
-                            <h3>Músicas</h3>
-                            {music.artist} - {music.name}
-                        </LiOrganize>
-                    );
-                 })}
-            </ListOrganize>
-        </Container>       
-    );
+      <Container>
+        {this.state.currentPage === "listPlaylists" ? (
+          <div>
+              <h3>Procurar Playlist</h3>
+            <input
+              placeholder="Nome exato para busca"
+              type="text"
+              value={this.state.playlistName}
+              onChange={this.handlePlaylistNameChange}
+              />
+              <button onClick={this.handleSearchPlaylist}>Procurar</button>
+              <p></p>
+              <hr />
+            <UlOrganize>
+              <p>Você tem {this.state.quantityPlaylists} playlists criadas:</p>
+              {this.state.namesPlaylists.length === 0 && <div>Carregando...</div>}
+              {this.state.namesPlaylists.map(name => {
+                return (
+                  <LiOrganize>
+                    <CursorSpan onClick={() => this.changePage(name.id)}>{name.name}</CursorSpan>
+                    <DeleteButton onClick={() => this.deletePlaylist(name.id)}><strong> X </strong></DeleteButton>
+                    <button onClick={() => this.changePage(name.id)}>Adicionar Música</button>
+                  </LiOrganize>
+                )
+              })}
+            </UlOrganize>
+          </div>
+        ) : (
+          <PlaylistsDetail playlistId={this.state.playlistId} changePage={this.changePage} />
+        )}
+      </Container>
+    )
   }
 }
 
