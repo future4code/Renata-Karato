@@ -1,4 +1,5 @@
 .App {
+  font-family: sans-serif;
   text-align: center;
 }
 
@@ -35,9 +36,4 @@
   to {
     transform: rotate(360deg);
   }
-}
-
-.App {
-  font-family: sans-serif;
-  text-align: center;
 }

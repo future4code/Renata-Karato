@@ -2,13 +2,43 @@ import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 
-const MatchScreen = props => {
-    const [message, setMessage] = useState("")
+import DeleteIcon from "../DeleteOutline.svg"
+import MatchIcon from "../MatchIcon.png"
+
+const ClearBox = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    position: fixed;
+    bottom: 0;
+`;
+
+const ClearButton = styled.img`
+    width: 40px;
+    position: fixed;
+    top: 32px;
+    right: 25px;
+    cursor: pointer;
+    
+    :hover {
+    -webkit-transform: scale(1.3);
+    -ms-transform: scale(1.3);
+    transform: scale(1.3);
+    }
+`;
+
+const MiniMatchIcon = styled.img`
+    width: 40px;
+    position: fixed;
+    top: 18px;
+    right: 25px;
+    cursor: pointer;
+`;
+
+const ClearMatches = props => {
     const [profile, setProfile] = useState({});
     
     useEffect(() => {
-        clearMatches();
-      }, []); 
+      }, []);  
 
     const clearMatches = () => {
         axios
@@ -18,20 +48,20 @@ const MatchScreen = props => {
             }
         )
         .then (response => {
-            setMessage(response.data.message)
-            console.log(response.data.message)
+            window.alert("Matches apagados com sucesso!")
         })
         .catch (error => {
             console.log(error)
         })
     }
 
+
     return (
-        <div>
-            <button onClick={clearMatches}>Limpar Matches</button>
-        </div>
-        
+        <ClearBox>
+            <MiniMatchIcon src={MatchIcon} />
+            <ClearButton src={DeleteIcon} onClick={clearMatches} />
+        </ClearBox>
     )
 }
   
-export default MatchScreen;
+export default ClearMatches;

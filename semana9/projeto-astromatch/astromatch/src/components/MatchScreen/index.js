@@ -2,8 +2,45 @@ import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 
+import Favorite from "@material-ui/icons/Favorite";
+
+import ReplyAll from "../ReplyAll.svg"
+
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
+
+const theme = createMuiTheme({
+    palette: {
+      primary: {
+        main: "rgb(247,92,3)"
+      },
+    }
+  });
+
+const BackButton = styled.img`
+    position: fixed;
+    top: 25px;
+    left: 40px;
+    cursor: pointer;
+    width: 30px;
+
+    :hover {
+    -webkit-transform: scale(1.3);
+    -ms-transform: scale(1.3);
+    transform: scale(1.3);
+    }
+`;
+
+const FavoriteButton = styled.div`
+    position: fixed;
+    top:20px;
+    left: 55px;
+`;
+
 const List = styled.ul`
   padding: 0 10px;
+  position: fixed;
+  top: 60px;
+  left: 20px;
 `;
 
 const ListItem = styled.li`
@@ -56,17 +93,18 @@ const MatchScreen = props => {
     const [matches, setMatches] = useState([])
 
     useEffect(() => {
-        getMatches();
+        if (getMatches) {
+            getMatches();
+        }
       }, []); 
 
-    const getMatches = () => {
+    const getMatches = (props) => {
         axios
         .get(
             `https://us-central1-missao-newton.cloudfunctions.net/astroMatch/renata-karato-mello/matches`
         )
         .then (response => {
             setMatches(response.data.matches)
-            console.log(response.data.matches)
         })
         .catch (error => {
             console.log(error)
@@ -74,21 +112,30 @@ const MatchScreen = props => {
     }
 
     return (
-        <div>
+        <MuiThemeProvider theme={theme}>
             <div>
-                <button onClick={props.changePage}>Quero Dar Mais Matches</button>
+                <div>
+                    <BackButton src={ReplyAll} onClick={props.changePage}/>
+                    <FavoriteButton>
+                        <Favorite 
+                            color="primary"
+                            cursor="pointer"
+                        />
+                    </FavoriteButton>
+                </div>
+                <List>
+                    {matches.length === 0 && <div>Carregando...</div>}
+                    {matches && matches.map(match => {
+                        return (
+                            <ListItem key={match.name}>
+                                <Avatar src={match.photo} />
+                                <ListText>{match.name}</ListText>
+                            </ListItem>
+                        )
+                    })}
+                </List>
             </div>
-            <List>
-                {matches && matches.map(match => {
-                    return (
-                        <ListItem key={match.name}>
-                            <Avatar src={match.photo} />
-                            <ListText>{match.name}</ListText>
-                        </ListItem>
-                    )
-                })}
-            </List>
-        </div>
+        </MuiThemeProvider>
         
     )
 }
