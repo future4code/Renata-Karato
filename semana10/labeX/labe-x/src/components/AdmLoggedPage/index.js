@@ -26,7 +26,7 @@ const LoggedPage = () => {
     };
 
     const goToCreateTripPage = () => {
-        history.push("/trips/create")
+        history.push(`/trips/create/`)
     }
 
     const goToHomePage = () => {

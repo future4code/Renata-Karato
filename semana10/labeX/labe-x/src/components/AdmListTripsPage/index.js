@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 import { useHistory } from "react-router";
 import axios from "axios";
 
-import UseProtectedPage from "../../hooks/UseProtectedPage"
-
-import styled from "styled-components";
+import useProtectedPage from "../../hooks/useProtectedPage"
 
 const MainContainer = styled.div`
-    width: 100vw;
-    height: 100vh;
     background-color: #DBCDF0;
 `;
 
@@ -16,16 +13,17 @@ const baseUrl =
   "https://us-central1-labenu-apis.cloudfunctions.net/labeX/renata-karato-mello";
 
 const ListTripsPage = () => {
-    UseProtectedPage();
+    useProtectedPage();
 
     const history = useHistory();
+    
     const [trips, setTrips] = useState([]);
 
     useEffect(() => {
         getListTrips();
     }, []);
 
-    const getListTrips = async () => {
+    const getListTrips = async() => {
         try {
             const response = await axios.get(`${baseUrl}/trips`);
             setTrips(response.data.trips)
@@ -39,12 +37,13 @@ const ListTripsPage = () => {
         history.push("/logged")
     }
     
-    const goToTripDetailsPage = () => {
-        history.push("/trips/details")
+    const goToTripDetailsPage = (id) => {
+        history.push(`/trips/details/${id}`)
     }
 
     return (
         <MainContainer>
+            <button onClick={goToLoggedPage}>Voltar</button>
             <h3>LISTA DE VIAGENS</h3>
             <p>Página para ver todas as viagens</p>
             <div>
@@ -57,13 +56,12 @@ const ListTripsPage = () => {
                                 <p>PLANETA: {trip.planet}</p>
                                 <p>DESCRIÇÃO: {trip.description}</p>
                                 <p>DATA: {trip.date} | DURAÇÃO: {trip.durationInDays} dias</p>
+                                <button onClick={() => goToTripDetailsPage(trip.id)}>Ver Detalhes</button>
                             </li>
                         )
                     })}
                 </ul>
             </div>
-            <button onClick={goToLoggedPage}>Voltar</button>
-            <button onClick={goToTripDetailsPage}>Ver detalhes de uma viagem</button>
         </MainContainer>
     )
 }

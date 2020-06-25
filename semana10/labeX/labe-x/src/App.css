@@ -36,3 +36,27 @@
     transform: rotate(360deg);
   }
 }
+
+input {
+  outline: none;
+}
+
+input:invalid {
+  border: 1px solid red;
+}
+
+input:valid {
+  border: 1px solid green;
+}
+
+select {
+  outline: none;
+}
+
+select:invalid {
+  border: 1px solid red;
+}
+
+select:valid {
+  border: 1px solid green;
+}

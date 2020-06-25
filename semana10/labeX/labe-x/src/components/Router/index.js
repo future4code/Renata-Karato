@@ -30,13 +30,13 @@ const Router = () => {
                 <Route exact path="/logged">
                     <AdmLoggedPage />
                 </Route>
-                <Route exact path="/trips/create">
+                <Route exact path="/trips/create/">
                     <AdmCreateTripPage />
                 </Route>
                 <Route exact path="/trips/list">
                     <AdmListTripsPage />
                 </Route>
-                <Route exact path="/trips/details">
+                <Route exact path="/trips/details/:id">
                     <AdmTripDetailsPage />
                 </Route>
             </Switch>
