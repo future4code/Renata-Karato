@@ -18,7 +18,7 @@ const HomePage = () => {
 
     return (
         <div>
-            <p>HOMEPAGE</p>
+            <h3>HOMEPAGE</h3>
             <p>Página para usuário escolher entre fazer login e formulário de aplicação</p>
             <button onClick={goToLoginPage}>Fazer Login</button>
             <button onClick={goToPublicListTripsPage}>Ver Viagens Disponíveis</button>

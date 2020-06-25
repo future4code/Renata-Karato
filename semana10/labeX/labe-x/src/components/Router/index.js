@@ -2,42 +2,42 @@ import React from "react";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 
 //Importando os components
-import HomePage from "../HomePage";
-import ApplicationFormPage from "../ApplicationFormPage";
+import PublicHomePage from "../PublicHomePage";
+import PublicApplicationFormPage from "../PublicApplicationFormPage";
 import PublicListTripsPages from "../PublicListTripsPage";
-import LoginPage from "../LoginPage";
-import LoggedPage from "../LoggedPage"
-import CreateTripPage from "../CreateTripPage";
-import ListTripsPage from "../ListTripsPage";
-import TripDetailsPage from "../TripDetailsPage";
+import PublicLoginPage from "../PublicLoginPage";
+import AdmLoggedPage from "../AdmLoggedPage"
+import AdmCreateTripPage from "../AdmCreateTripPage";
+import AdmListTripsPage from "../AdmListTripsPage";
+import AdmTripDetailsPage from "../AdmTripDetailsPage";
 
 const Router = () => {
     return (
         <BrowserRouter>
             <Switch>
                 <Route exact path="/">
-                    <HomePage />
+                    <PublicHomePage />
                 </Route>
                 <Route exact path="/application-form">
-                    <ApplicationFormPage />
+                    <PublicApplicationFormPage />
                 </Route>
                 <Route exact path="/trips/public-list">
                     <PublicListTripsPages />
                 </Route>
                 <Route exact path="/login">
-                    <LoginPage />
+                    <PublicLoginPage />
                 </Route>
                 <Route exact path="/logged">
-                    <LoggedPage />
+                    <AdmLoggedPage />
                 </Route>
                 <Route exact path="/trips/create">
-                    <CreateTripPage />
+                    <AdmCreateTripPage />
                 </Route>
                 <Route exact path="/trips/list">
-                    <ListTripsPage />
+                    <AdmListTripsPage />
                 </Route>
                 <Route exact path="/trips/details">
-                    <TripDetailsPage />
+                    <AdmTripDetailsPage />
                 </Route>
             </Switch>
         </BrowserRouter>
