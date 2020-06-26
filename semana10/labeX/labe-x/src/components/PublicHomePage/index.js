@@ -1,36 +1,63 @@
 import React from "react";
-import styled from "styled-components";
-import { useHistory } from "react-router";
+import { useHistory, useParams } from "react-router";
+import { MainContainer, Header, Footer, BoxButtons, ButtonOrange, ButtonGreen, ImgLogo, ImgBanner, MessageFooter } from "./styled";
 
-const MainContainer = styled.div`
-    width: 100vw;
-    height: 100vh;
-    background-color: #FAEDCB;;
-`;
+import LogoHome from "../../imgs/logoHome.png"
+import CallHome from "../../imgs/callHome.png"
 
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
+
+const theme = createMuiTheme({
+    palette: {
+      primary: {
+        main: "#FC9F5B"
+      },
+      secondary: {
+        main: "#33CA7F"
+      }
+    }
+  });
+
+  
 const HomePage = () => {
+    const { id } = useParams();
     const history = useHistory();
-    
+
     const goToLoginPage = () => {
         history.push("/login")
     };
 
     const goToPublicListTripsPage = () => {
         history.push("/trips/public-list")
-    }
+    };
 
     const goToApplicationFormPage = () => {
-        history.push("/application-form")
-    }
+        history.push(`/trips/${id}/form`)
+    };
 
     return (
-        <MainContainer>
-            <h3>HOMEPAGE</h3>
-            <p>Página para usuário escolher entre fazer login e formulário de aplicação</p>
-            <button onClick={goToLoginPage}>Fazer Login</button>
-            <button onClick={goToPublicListTripsPage}>Ver Viagens Disponíveis</button>
-            <button onClick={goToApplicationFormPage}>Candidatar-se</button>
-        </MainContainer>
+        <MuiThemeProvider theme={theme}>
+            <MainContainer>
+                <Header>
+                    <div class="header-right">
+                        <a class="active" href="/">Home</a>
+                        <a href="/contact">Contato</a>
+                        <a href="/about">Sobre</a>
+                    </div>
+                </Header>
+                <ImgLogo src={LogoHome} alt="Logo" />
+                <ImgBanner src={CallHome} alt="Banner" />
+                <BoxButtons>
+                    <ButtonOrange color="primary" variant="contained" size="large" onClick={goToLoginPage}>Login</ButtonOrange>
+                    <ButtonGreen color="secondary" variant="contained" size="large" onClick={goToPublicListTripsPage}>Viagens Disponíveis</ButtonGreen>
+                    <ButtonGreen color="secondary" variant="contained" size="large" onClick={goToApplicationFormPage}>Candidatar-se</ButtonGreen>
+                </BoxButtons>
+                <Footer>
+                    <MessageFooter><strong>AGRADECEMOS A VISITA... VOLTE SEMPRE!</strong> </MessageFooter>
+                    <p>By Renata Karato - Turma Mello</p>
+                </Footer>
+            </MainContainer>
+        </MuiThemeProvider>
     )
 }
 

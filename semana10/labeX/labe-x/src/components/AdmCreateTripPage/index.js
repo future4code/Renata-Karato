@@ -120,7 +120,7 @@ const CreateTripPage = () => {
                         name="date"
                         value={form.date}
                         onChange={handleInputChange}
-                        min="2020-06-26"
+                        min={new Date().toJSON().split("T")[0]}
                     />
                 </div>
                 <div>

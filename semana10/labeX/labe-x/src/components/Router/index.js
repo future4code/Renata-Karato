@@ -1,5 +1,6 @@
 import React from "react";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
+import DocumentTitle from "react-document-title";
 
 //Importando os components
 import PublicHomePage from "../PublicHomePage";
@@ -16,28 +17,44 @@ const Router = () => {
         <BrowserRouter>
             <Switch>
                 <Route exact path="/">
-                    <PublicHomePage />
+                    <DocumentTitle title="LabeX - Home">
+                        <PublicHomePage />
+                    </DocumentTitle>
                 </Route>
-                <Route exact path="/application-form">
-                    <PublicApplicationFormPage />
+                <Route exact path="/trips/:id/form">
+                    <DocumentTitle title="LabeX - Formulário de Inscrição">
+                        <PublicApplicationFormPage />
+                    </DocumentTitle>
                 </Route>
                 <Route exact path="/trips/public-list">
-                    <PublicListTripsPages />
+                    <DocumentTitle title="LabeX - Lista de Viagens">    
+                        <PublicListTripsPages />
+                    </DocumentTitle>
                 </Route>
                 <Route exact path="/login">
-                    <PublicLoginPage />
+                    <DocumentTitle title="LabeX - Login Administrador">
+                        <PublicLoginPage />
+                    </DocumentTitle>
                 </Route>
                 <Route exact path="/logged">
-                    <AdmLoggedPage />
+                    <DocumentTitle title="LabeX - Logado">
+                        <AdmLoggedPage />
+                    </DocumentTitle>
                 </Route>
                 <Route exact path="/trips/create/">
-                    <AdmCreateTripPage />
+                    <DocumentTitle title="LabeX - Criar Viagem">
+                        <AdmCreateTripPage />
+                    </DocumentTitle>
                 </Route>
                 <Route exact path="/trips/list">
-                    <AdmListTripsPage />
+                    <DocumentTitle title="LabeX - Lista de Viagens">
+                        <AdmListTripsPage />
+                    </DocumentTitle>
                 </Route>
                 <Route exact path="/trips/details/:id">
-                    <AdmTripDetailsPage />
+                    <DocumentTitle title="LabeX - Detalhes da Viagem">    
+                        <AdmTripDetailsPage />
+                    </DocumentTitle>
                 </Route>
             </Switch>
         </BrowserRouter>

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router";
+import styled from "styled-components";
+import { useHistory, useParams } from "react-router";
 import axios from "axios";
 
 import useProtectedPage from "../../hooks/useProtectedPage"
 
-import styled from "styled-components";
 
 const MainContainer = styled.div`
     background-color: #DBCDF0;
@@ -16,6 +16,8 @@ const baseUrl =
 const TripDetailsPage = () => {
     useProtectedPage();
 
+    const { id } = useParams();
+    
     const history = useHistory();
 
     const [candidates, setCandidates] = useState([])
@@ -23,7 +25,7 @@ const TripDetailsPage = () => {
 
     useEffect(() => {
         getListDetails();
-    }, []);
+    }, );
 
     const getListDetails = async() => {
         const token = localStorage.getItem("token");
@@ -35,11 +37,10 @@ const TripDetailsPage = () => {
         };
 
         try {
-            const response = await axios.get(`${baseUrl}/trip/${token}`, axiosConfig);
+            const response = await axios.get(`${baseUrl}/trip/${id}`, axiosConfig);
             setCandidates(response.data.trip.candidates)
             setApproved(response.data.trip.approved)
             console.log(response.data.trip.candidates)
-            console.log(response.data.trip.approved)
         } catch (error) {
             console.log(error)
         }
@@ -57,6 +58,7 @@ const TripDetailsPage = () => {
             <p>Listar, aprovar e rejeitar inscrições</p>
             <div>
                 <ul>
+                    {candidates.length === 0 && <div>Carregando...</div>}
                     {candidates && candidates.map(candidate => {
                         return (
                             <li key={candidate.name}>
@@ -64,6 +66,20 @@ const TripDetailsPage = () => {
                                 <p>IDADE: {candidate.age} | PAÍS: {candidate.country}</p>
                                 <p>PROFISSÃO: {candidate.profession}</p>
                                 <p>MOTIVO: {candidate.applicationText}</p>
+                            </li>
+                        )
+                    })}
+                </ul>
+            </div>
+            <div>
+                <ul>
+                    {approved && approved.map(person => {
+                        return (
+                            <li key={person.name}>
+                                <p>NOME: {person.name}</p>
+                                <p>IDADE: {person.age} | PAÍS: {person.country}</p>
+                                <p>PROFISSÃO: {person.profession}</p>
+                                <p>MOTIVO: {person.applicationText}</p>
                             </li>
                         )
                     })}

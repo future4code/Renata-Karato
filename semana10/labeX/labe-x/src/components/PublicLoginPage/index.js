@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router";
 import axios from "axios";
@@ -17,6 +17,10 @@ const LoginPage = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    useEffect(() => {
+        
+    }, []); 
+
     const handleLogin = async () => {
         const body = {
             email: email,
@@ -28,7 +32,7 @@ const LoginPage = () => {
             localStorage.setItem("token", response.data.token);
             history.push("/logged");
         } catch (error) {
-            alert("Login falhou :(")
+            alert("E-mail ou senha incorretos. Tente novamente.")
         }
     };
 
@@ -45,6 +49,7 @@ const LoginPage = () => {
                 value={email}
                 placeholder="E-mail"
                 type="email"
+                required
                 onChange={e => setEmail(e.target.value)}
             />
             <label>Senha</label>
@@ -52,6 +57,7 @@ const LoginPage = () => {
                 value={password}
                 placeholder="Senha"
                 type="password"
+                required 
                 onChange={e => setPassword(e.target.value)}
             />
             <button onClick={handleLogin}>Fazer Login</button>

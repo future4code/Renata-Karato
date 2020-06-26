@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { useHistory } from "react-router";
+import { useHistory, useParams } from "react-router";
 
 import useForm from "../../hooks/useForm";
 
@@ -28,6 +28,8 @@ const baseUrl =
 
 const ApplicationFormPage = () => {
     const { form, onChange } = useForm ({ name: "", age: "", application: "", profession: "", country: "", tripName: ""})
+    const { id } = useParams();
+    
     const history = useHistory();
     
     const [trips, setTrips] = useState([])
@@ -46,27 +48,6 @@ const ApplicationFormPage = () => {
         }
     }
     
-    const applyToTrip = async(tripId) => {
-        const body = {
-            name: form.name,
-            age: form.age,
-            applicationText: form.application,
-            profession: form.profession,
-            country: form.country,
-        };    
-
-        try {
-            const response = await axios.post(`${baseUrl}/trips/${tripId}/apply`, body);
-            console.log(response.data.sucess);
-            console.log(response.data.message);
-            alert("Candidatura enviada com sucesso!")
-            getListTrips();
-        } catch (error) {
-            alert("Ocorreu um erro ao candidatar-se.")
-            console.log(error)
-        }
-    }
-
     const goToHomePage = () => {
         history.push("/")
     };
@@ -75,9 +56,27 @@ const ApplicationFormPage = () => {
         history.push("/trips/public-list")
     }
 
-    const mySubmitHandler = (event) => {
+    const mySubmitHandler = async (event) => {
         event.preventDefault();
-        applyToTrip();
+        
+        const body = {
+            name: form.name,
+            age: form.age,
+            applicationText: form.applicationText,
+            profession: form.profession,
+            country: form.country,
+        };    
+
+        try {
+            const response = await axios.post(`${baseUrl}/trips/${id}/apply`, form, body);
+            console.log(response.data.sucess);
+            console.log(response.data.message);
+            alert("Candidatura enviada com sucesso!")
+            getListTrips();
+        } catch (error) {
+            alert("Ocorreu um erro ao candidatar-se.")
+            console.log(error)
+        }
     }
 
     const handleInputChange = (event) => {
@@ -117,13 +116,13 @@ const ApplicationFormPage = () => {
                     />
                 </div>
                 <div>
-                    <label forhtml="application">Por que sou um bom candidato?</label>
+                    <label forhtml="applicationText">Por que sou um bom candidato?</label>
                     <InputDescription
-                        id="application"
+                        id="applicationText"
                         type="text"
                         required
-                        name="application"
-                        value={form.application}
+                        name="applicationText"
+                        value={form.applicationText}
                         minLength="30"
                         onChange={handleInputChange}
                     />
@@ -411,7 +410,7 @@ const ApplicationFormPage = () => {
                         <option value={""}></option>
                         {trips && trips.map(trip => {
                             return (
-                                <option key={trip.name} value={trip.name}>
+                                <option key={id} value={trip.name}>
                                     {trip.name}
                                 </option>
                             )
