@@ -17,19 +17,22 @@ const TripDetailsPage = () => {
     useProtectedPage();
 
     const { id } = useParams();
-    
     const history = useHistory();
+
+    const token = localStorage.getItem("token");
 
     const [candidates, setCandidates] = useState([])
     const [approved, setApproved] = useState([])
+    const [approve, setApprove] = useState(true)
+    const [newToken, setNewToken] = useState(null)
 
     useEffect(() => {
+        const token = localStorage.getItem("token");
+        setNewToken(token)
         getListDetails();
-    }, );
+    }, []);
 
     const getListDetails = async() => {
-        const token = localStorage.getItem("token");
-
         const axiosConfig = {
             headers:{
                 auth: token,
@@ -40,7 +43,26 @@ const TripDetailsPage = () => {
             const response = await axios.get(`${baseUrl}/trip/${id}`, axiosConfig);
             setCandidates(response.data.trip.candidates)
             setApproved(response.data.trip.approved)
-            console.log(response.data.trip.candidates)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const decideCandidate = async(candidateId) => {
+        const axiosConfig = {
+            headers:{
+                auth: token,
+            }
+        };
+
+        const body = {
+            approve: approve,
+        };
+
+        try {
+            const response = await axios.put(`${baseUrl}/trips/${id}/candidates/${candidateId}/decide`, body, axiosConfig)
+            setApprove(response.data.message)
+            alert("Candidatura aprovada com sucesso!")
         } catch (error) {
             console.log(error)
         }
@@ -53,9 +75,8 @@ const TripDetailsPage = () => {
     return (
         <MainContainer>
             <button onClick={goToListTripsPage}>Voltar</button>
-            <p>DETALHES DE UMA VIAGEM</p>
-            <p>Página para ver os detalhes de uma viagem</p>
-            <p>Listar, aprovar e rejeitar inscrições</p>
+            <p>CANDIDATOS A APROVAR</p>
+            <p>Aprovar e rejeitar inscrições</p>
             <div>
                 <ul>
                     {candidates.length === 0 && <div>Carregando...</div>}
@@ -66,20 +87,22 @@ const TripDetailsPage = () => {
                                 <p>IDADE: {candidate.age} | PAÍS: {candidate.country}</p>
                                 <p>PROFISSÃO: {candidate.profession}</p>
                                 <p>MOTIVO: {candidate.applicationText}</p>
+                                <button onClick={() => decideCandidate(candidate.id)}>Aprovar</button>
                             </li>
                         )
                     })}
                 </ul>
             </div>
             <div>
+                <p>CANDIDATOS APROVADOS</p>
                 <ul>
-                    {approved && approved.map(person => {
+                    {approved && approved.map(candidate => {
                         return (
-                            <li key={person.name}>
-                                <p>NOME: {person.name}</p>
-                                <p>IDADE: {person.age} | PAÍS: {person.country}</p>
-                                <p>PROFISSÃO: {person.profession}</p>
-                                <p>MOTIVO: {person.applicationText}</p>
+                            <li key={candidate.name}>
+                                <p>NOME: {candidate.name}</p>
+                                <p>IDADE: {candidate.age} | PAÍS: {candidate.country}</p>
+                                <p>PROFISSÃO: {candidate.profession}</p>
+                                <p>MOTIVO: {candidate.applicationText}</p>
                             </li>
                         )
                     })}

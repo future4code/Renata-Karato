@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useHistory, useParams } from "react-router";
+import { useHistory } from "react-router";
 import axios from "axios";
 
 const MainContainer = styled.div`
@@ -13,7 +13,6 @@ const baseUrl =
   "https://us-central1-labenu-apis.cloudfunctions.net/labeX/renata-karato-mello";
 
 const PublicListTripsPage = () => {
-    const { id } = useParams();
     const history = useHistory();
 
     const [trips, setTrips] = useState([]);
@@ -32,8 +31,8 @@ const PublicListTripsPage = () => {
         }
     }
     
-    const goToApplicationFormPage = () => {
-        history.push(`/trips/${id}/form`)
+    const goToApplicationFormPage = (id) => {
+        history.push(`/trips/form/${id}`)
     }
 
     const goToHomePage = () => {
@@ -43,7 +42,6 @@ const PublicListTripsPage = () => {
     return (
         <MainContainer>
             <button onClick={goToHomePage}>Voltar Para Home</button>
-            <button onClick={goToApplicationFormPage}>Candidatar-se</button>
             <p>VIAGENS DISPONÍVEIS</p>
             <p>Página para usuários ver as viagens espaciais disponíveis</p>
             <div>
@@ -56,6 +54,7 @@ const PublicListTripsPage = () => {
                                 <p>PLANETA: {trip.planet}</p>
                                 <p>DESCRIÇÃO: {trip.description}</p>
                                 <p>DATA: {trip.date} | DURAÇÃO: {trip.durationInDays} dias</p>
+                                <button onClick={() => goToApplicationFormPage(trip.id)}>Candidatar-se</button>
                             </li>
                         )
                     })}

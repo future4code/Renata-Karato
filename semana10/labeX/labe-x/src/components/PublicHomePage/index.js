@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory, useParams } from "react-router";
+import { useHistory } from "react-router";
 import { MainContainer, Header, Footer, BoxButtons, ButtonOrange, ButtonGreen, ImgLogo, ImgBanner, MessageFooter } from "./styled";
 
 import LogoHome from "../../imgs/logoHome.png"
@@ -20,7 +20,6 @@ const theme = createMuiTheme({
 
   
 const HomePage = () => {
-    const { id } = useParams();
     const history = useHistory();
 
     const goToLoginPage = () => {
@@ -29,10 +28,6 @@ const HomePage = () => {
 
     const goToPublicListTripsPage = () => {
         history.push("/trips/public-list")
-    };
-
-    const goToApplicationFormPage = () => {
-        history.push(`/trips/${id}/form`)
     };
 
     return (
@@ -50,7 +45,6 @@ const HomePage = () => {
                 <BoxButtons>
                     <ButtonOrange color="primary" variant="contained" size="large" onClick={goToLoginPage}>Login</ButtonOrange>
                     <ButtonGreen color="secondary" variant="contained" size="large" onClick={goToPublicListTripsPage}>Viagens Disponíveis</ButtonGreen>
-                    <ButtonGreen color="secondary" variant="contained" size="large" onClick={goToApplicationFormPage}>Candidatar-se</ButtonGreen>
                 </BoxButtons>
                 <Footer>
                     <MessageFooter><strong>AGRADECEMOS A VISITA... VOLTE SEMPRE!</strong> </MessageFooter>

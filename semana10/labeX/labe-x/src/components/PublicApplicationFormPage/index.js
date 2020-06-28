@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { useHistory, useParams } from "react-router";
@@ -31,24 +31,11 @@ const ApplicationFormPage = () => {
     const { id } = useParams();
     
     const history = useHistory();
-    
-    const [trips, setTrips] = useState([])
 
     useEffect(() => {
-        getListTrips();
     }, []); 
 
-    const getListTrips = async () => {
-        try {
-            const response = await axios.get(`${baseUrl}/trips`);
-            setTrips(response.data.trips)
-            console.log(response.data.trips)
-        } catch (error) {
-            console.log(error)
-        }
-    }
-    
-    const goToHomePage = () => {
+        const goToHomePage = () => {
         history.push("/")
     };
 
@@ -72,7 +59,6 @@ const ApplicationFormPage = () => {
             console.log(response.data.sucess);
             console.log(response.data.message);
             alert("Candidatura enviada com sucesso!")
-            getListTrips();
         } catch (error) {
             alert("Ocorreu um erro ao candidatar-se.")
             console.log(error)
@@ -88,7 +74,7 @@ const ApplicationFormPage = () => {
     return (
         <MainContainer>
             <button onClick={goToHomePage}>Voltar Para Home</button>
-            <button onClick={goToPublicListTripsPage}>Ver Viagens Disponíveis</button>
+            <button onClick={goToPublicListTripsPage}>Voltar Para Viagens</button>
             <p>FORMULÁRIO</p>
             <p>Página para usuário se inscrever em uma viagem</p>
             <form onSubmit={mySubmitHandler}>
@@ -396,25 +382,6 @@ const ApplicationFormPage = () => {
                         <option value="YE">Yemen</option>
                         <option value="ZM">Zambia</option>
                         <option value="ZW">Zimbabwe</option>
-                    </select>
-                </div>
-                <div>
-                    <label forhtml="tripName">Viagem de interesse:</label>
-                    <select 
-                        
-                        type="select"
-                        required
-                        name="tripName"
-                        onChange={handleInputChange}
-                    >
-                        <option value={""}></option>
-                        {trips && trips.map(trip => {
-                            return (
-                                <option key={id} value={trip.name}>
-                                    {trip.name}
-                                </option>
-                            )
-                        })}
                     </select>
                 </div>
                 <div>

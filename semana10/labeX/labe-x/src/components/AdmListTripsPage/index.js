@@ -56,7 +56,7 @@ const ListTripsPage = () => {
                                 <p>PLANETA: {trip.planet}</p>
                                 <p>DESCRIÇÃO: {trip.description}</p>
                                 <p>DATA: {trip.date} | DURAÇÃO: {trip.durationInDays} dias</p>
-                                <button onClick={() => goToTripDetailsPage(trip.id)}>Ver Detalhes</button>
+                                <button onClick={() => goToTripDetailsPage(trip.id)}>Ver Candidatos</button>
                             </li>
                         )
                     })}

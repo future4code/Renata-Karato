@@ -21,7 +21,7 @@ const Router = () => {
                         <PublicHomePage />
                     </DocumentTitle>
                 </Route>
-                <Route exact path="/trips/:id/form">
+                <Route exact path="/trips/form/:id">
                     <DocumentTitle title="LabeX - Formulário de Inscrição">
                         <PublicApplicationFormPage />
                     </DocumentTitle>
