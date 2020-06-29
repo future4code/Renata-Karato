@@ -36,8 +36,11 @@ const HomePage = () => {
                 <Header>
                     <div class="header-right">
                         <a class="active" href="/">Home</a>
+                        <a href="/login">Login</a>
+                        <a href="/trips/public-list">Quero Viajar</a>
                         <a href="/contact">Contato</a>
                         <a href="/about">Sobre</a>
+                        
                     </div>
                 </Header>
                 <ImgLogo src={LogoHome} alt="Logo" />

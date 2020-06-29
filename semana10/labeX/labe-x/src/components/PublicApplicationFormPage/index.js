@@ -3,25 +3,10 @@ import styled from "styled-components";
 import axios from "axios";
 import { useHistory, useParams } from "react-router";
 
+import { MainContainer, Header, ImgLogo, Title, Subtitle, Form, Label, InputName, InputDescription, InputWithoutArrows, InputProfession, CountrySelection, ButtonForm, Footer, MessageFooter } from "./styled";
+
+import LogoHome from "../../imgs/logoHome.png"
 import useForm from "../../hooks/useForm";
-
-const MainContainer = styled.div`
-    background-color: #C9E4DE;
-`;
-
-const InputDescription = styled.input`
-    width: 15vw;
-    height: 10vh;
-`;
-
-const InputWithoutArrows = styled.input`
-    /*hide arrows from number input */
-    ::-webkit-inner-spin-button, 
-    ::-webkit-outer-spin-button { 
-    -webkit-appearance: none; 
-    margin: 0; 
-    }
-`;
 
 const baseUrl =
   "https://us-central1-labenu-apis.cloudfunctions.net/labeX/renata-karato-mello";
@@ -73,14 +58,25 @@ const ApplicationFormPage = () => {
 
     return (
         <MainContainer>
-            <button onClick={goToHomePage}>Voltar Para Home</button>
-            <button onClick={goToPublicListTripsPage}>Voltar Para Viagens</button>
-            <p>FORMULÁRIO</p>
-            <p>Página para usuário se inscrever em uma viagem</p>
-            <form onSubmit={mySubmitHandler}>
+            <Header>
+                <div class="header-left" onClick={goToHomePage}>
+                    <ImgLogo src={LogoHome} alt="Logo" />
+                </div>
+                <div class="header-right">
+                    <a href="/">Home</a>
+                    <a href="/login">Login</a>
+                    <a href="/trips/public-list">Quero Viajar</a>
+                    <a href="/contact">Contato</a>
+                    <a href="/about">Sobre</a>
+                    
+                </div>
+            </Header>
+            <Title>FORMULÁRIO</Title>
+            <Subtitle>Se inscreva na viagem de seu interesse e aguarde nossa aprovação.</Subtitle>
+            <Form onSubmit={mySubmitHandler}>
                 <div>
-                    <label forhtml="name">Nome</label>
-                    <input
+                    <Label forhtml="name">Nome:</Label>
+                    <InputName
                         id="name"
                         type="text"
                         required
@@ -89,7 +85,7 @@ const ApplicationFormPage = () => {
                         pattern="[A-Za-z ]{3,}"
                         onChange={handleInputChange}
                     />
-                    <label forhtml="age">Idade</label>
+                    <Label forhtml="age">Idade:</Label>
                     <InputWithoutArrows
                         id="age"
                         type="number"
@@ -102,7 +98,7 @@ const ApplicationFormPage = () => {
                     />
                 </div>
                 <div>
-                    <label forhtml="applicationText">Por que sou um bom candidato?</label>
+                    <Label forhtml="applicationText">Por que sou um bom candidato?</Label>
                     <InputDescription
                         id="applicationText"
                         type="text"
@@ -114,8 +110,8 @@ const ApplicationFormPage = () => {
                     />
                 </div>
                 <div>
-                    <label forhtml="profession">Profissão</label>
-                    <input
+                    <Label forhtml="profession">Profissão:</Label>
+                    <InputProfession
                         id="profession"
                         type="text"
                         required
@@ -124,8 +120,8 @@ const ApplicationFormPage = () => {
                         minLength="3"
                         onChange={handleInputChange}
                     />
-                    <label forhtml="country">País</label>
-                    <select
+                    <Label forhtml="country">País:</Label>
+                    <CountrySelection
                         
                         type="select"
                         required
@@ -382,12 +378,16 @@ const ApplicationFormPage = () => {
                         <option value="YE">Yemen</option>
                         <option value="ZM">Zambia</option>
                         <option value="ZW">Zimbabwe</option>
-                    </select>
+                    </CountrySelection>
                 </div>
                 <div>
-                    <button type="submit">Enviar</button>
+                    <ButtonForm type="submit">Enviar</ButtonForm>
                 </div>
-            </form>
+            </Form>
+            <Footer>
+                <MessageFooter><strong>AGRADECEMOS A VISITA... VOLTE SEMPRE!</strong> </MessageFooter>
+                <p>By Renata Karato - Turma Mello</p>
+            </Footer>
         </MainContainer>
     )
 }
