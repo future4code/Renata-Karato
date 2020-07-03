@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import styled from "styled-components";
 
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
+import Clear from '@material-ui/icons/Clear';
+
 /* 
 #F8FFE5 - branco amarelado
 #06D6A0 - verde
@@ -11,6 +14,14 @@ import styled from "styled-components";
 #242038 - roxo escurão
 #725AC1 - roxo
 */
+
+const MyTheme = createMuiTheme({
+    palette: {
+      primary: {
+        main: '#FFC43D',
+      },
+    },
+  });
 
 const MainContainer = styled.div`
   background-color: #06D6A0; /*caribbean green*/
@@ -88,7 +99,7 @@ const Main = styled.main`
         background-color: #EF476F; /*paradise pink*/
         border-radius: 10px;
         margin: 10px;
-        padding: 10px;
+        padding: 5px;
         height: 50vh;
         width: 20vw;
         height: 38.6vh;
@@ -104,9 +115,24 @@ const Main = styled.main`
     }
 `;
 
+const WeekName = styled.p`
+    text-align: center;
+    font-weight: bold;
+`;
+
 const Task = styled.li`
     text-align: left;
+    font-family: Roboto;
+    font-size: 14px;
     text-decoration: ${({ completed }) => (completed ? 'line-through' : 'none')};
+`;
+
+const DeleteButton = styled.span`
+  color: #FFC43D;
+  cursor: pointer;
+  padding: 0 5px;
+  position: relative;
+  top: 5px;
 `;
 
 const baseUrl = 
@@ -153,7 +179,20 @@ const PlannerPage = () => {
         })
     }
 
-    /* const selectTask = (id) => {
+    const deleteTask = async(taskId) => {
+        if(window.confirm("Tem certeza que deseja apagar esta tarefa?")) {
+            await axios.delete(`${baseUrl}/${taskId}`)
+            .then(() => {
+                alert("Tarefa apagada com sucesso!")
+                getTasks();
+            })
+            .catch(error => {
+                alert("Não foi possível apagar a tarefa!")
+            })
+        }
+    }
+
+    const selectTask = (id) => {
         const newTaskList = tasks.map((task) => {
             if(task.id === id) {
                 return {
@@ -164,46 +203,7 @@ const PlannerPage = () => {
             return task
         })
         setTasks(newTaskList)
-    } */
-
-    let organizeByDay = ({
-        allDays: [], monday: [], tuesday: [], wednesday: [], thursday: [], friday: [], saturday: [], sunday: [] });
-
-    tasks.forEach((task) => {
-        switch(task.day) {
-            case "Todos os Dias":
-                organizeByDay.allDays.push(task.text)
-                break;
-            case "Segunda":
-                organizeByDay.monday.push(task.text)
-                break;
-            case "Terça":
-                organizeByDay.tuesday.push(task.text)
-                break;
-            case "Quarta":
-                organizeByDay.wednesday.push(task.text)
-                break;
-            case "Quinta":
-                organizeByDay.thursday.push(task.text)
-                break;
-            case "Sexta":
-                organizeByDay.friday.push(task.text)
-                break;
-            case "Sábado":
-                organizeByDay.saturday.push(task.text)
-                break;
-            case "Domingo":
-                organizeByDay.sunday.push(task.text)
-                break;
-            default:
-                organizeByDay.allDays.push(null)
-        }
-    })
-    
-   /*  {tasks && tasks.map ((data, index) => {
-        return (
-        )
-    })} */
+    } 
 
   return (
     <MainContainer>
@@ -240,121 +240,201 @@ const PlannerPage = () => {
         </BoxTask>
         <Hr />
         <Main>
-            <div id="allDays" name="allDays">
-                Todos os Dias
-                {organizeByDay.allDays.map((item) => {
-                    return (
-                        <ul className="content">
-                            <Task 
-                                /* completed={data.completed}
-                                onClick={() => selectTask(data.id)}
-                                key={index}  */
-                            >
-                                {item}
-                            </Task>
-                        </ul>
-                    )
-                })}
-            </div>
-        
-            <div id="monday" name="monday">
-                Segunda-Feira
-                {organizeByDay.monday.map((item) => {
-                    return (
-                        <ul className="content">
-                            <Task 
-                                
-                            >
-                                {item}
-                            </Task>
-                        </ul>
-                    )
-                })}
-            </div>
-            <div id="tuesday">
-                Terça-Feira
-                {organizeByDay.tuesday.map((item) => {
-                    return (
-                        <ul className="content">
-                            <Task 
-                                
-                            >
-                                {item}
-                            </Task>
-                        </ul>
-                    )
-                })}
-            </div>
-            <div id="wednesday">
-                Quarta-Feira
-                {organizeByDay.wednesday.map((item) => {
-                    return (
-                        <ul className="content">
-                            <Task 
-                                
-                            >
-                                {item}
-                            </Task>
-                        </ul>
-                    )
-                })}
-            </div>
-            <div id="thursday">
-                Quinta-Feira
-                {organizeByDay.thursday.map((item) => {
-                    return (
-                        <ul className="content">
-                            <Task 
-                                
-                            >
-                                {item}
-                            </Task>
-                        </ul>
-                    )
-                })}
-            </div>
-            <div id="friday">
-                Sexta-Feira
-                {organizeByDay.friday.map((item) => {
-                    return (
-                        <ul className="content">
-                            <Task 
-                                
-                            >
-                                {item}
-                            </Task>
-                        </ul>
-                    )
-                })}
-            </div>
-            <div id="saturday">
-                Sábado
-                {organizeByDay.saturday.map((item) => {
-                    return (
-                        <ul className="content">
-                            <Task 
-                                
-                            >
-                                {item}
-                            </Task>
-                        </ul>
-                    )
-                })}
-            </div>
-            <div id="sunday">
-                Domingo
-                {organizeByDay.sunday.map((item) => {
-                    return (
-                        <ul className="content">
-                            <Task 
-                                
-                            >
-                                {item}
-                            </Task>
-                        </ul>
-                    )
-                })}
-            </div>
+            <MuiThemeProvider theme={MyTheme}>
+                <div id="allDays" name="allDays">
+                    <WeekName>Todos os Dias</WeekName>
+                    {tasks && tasks.map((task, index) => {
+                        if (task.day === "Todos os Dias") {
+                            return ( 
+                                <ul>
+                                    <Task 
+                                        completed={task.completed} 
+                                        onClick={() => selectTask(task.id)} 
+                                        key={index}
+                                        data-testid="item-task"
+                                    >
+                                        {task.text}
+                                        <DeleteButton data-testid="delete" onClick={() => deleteTask(task.id)}>
+                                            <Clear color="primary"/>
+                                        </DeleteButton>
+                                    </Task>
+                                </ul>
+                            )
+                        } else {
+                            return null
+                        }
+                    })}
+                </div>
+            
+                <div id="monday" name="monday">
+                    <WeekName>Segunda-Feira</WeekName>
+                    {tasks && tasks.map((task, index) => {
+                        if (task.day === "Segunda") {
+                            return ( 
+                                <ul>
+                                    <Task 
+                                        completed={task.completed} 
+                                        onClick={() => selectTask(task.id)} 
+                                        key={index}
+                                        data-testid="item-task"
+                                    >
+                                        {task.text}
+                                        <DeleteButton data-testid="delete" onClick={() => deleteTask(task.id)}>
+                                            <Clear color="primary"/>
+                                        </DeleteButton>
+                                    </Task>
+                                </ul>
+                            )
+                        } else {
+                            return null
+                        }
+                    })}
+                </div>
+                <div id="tuesday">
+                    <WeekName>Terça-Feira</WeekName>
+                    {tasks && tasks.map((task, index) => {
+                        if (task.day === "Terça") {
+                            return ( 
+                                <ul>
+                                    <Task 
+                                        completed={task.completed} 
+                                        onClick={() => selectTask(task.id)} 
+                                        key={index}
+                                        data-testid="item-task"
+                                    >
+                                        {task.text}
+                                        <DeleteButton data-testid="delete" onClick={() => deleteTask(task.id)}>
+                                            <Clear color="primary"/>
+                                        </DeleteButton>
+                                    </Task>
+                                </ul>
+                            )
+                        } else {
+                            return null
+                        }
+                    })}
+                </div>
+                <div id="wednesday">
+                    <WeekName>Quarta-Feira</WeekName>
+                    {tasks && tasks.map((task, index) => {
+                        if (task.day === "Quarta") {
+                            return ( 
+                                <ul>
+                                    <Task 
+                                        completed={task.completed} 
+                                        onClick={() => selectTask(task.id)} 
+                                        key={index}
+                                        data-testid="item-task"
+                                    >
+                                        {task.text}
+                                        <DeleteButton data-testid="delete" onClick={() => deleteTask(task.id)}>
+                                            <Clear color="primary"/>
+                                        </DeleteButton>
+                                    </Task>
+                                </ul>
+                            )
+                        } else {
+                            return null
+                        }
+                    })}
+                </div>
+                <div id="thursday">
+                    <WeekName>Quinta-Feira</WeekName>
+                    {tasks && tasks.map((task, index) => {
+                        if (task.day === "Quinta") {
+                            return ( 
+                                <ul>
+                                    <Task 
+                                        completed={task.completed} 
+                                        onClick={() => selectTask(task.id )}
+                                        key={index}
+                                        data-testid="item-task" 
+                                    >
+                                        {task.text}
+                                        <DeleteButton data-testid="delete" onClick={() => deleteTask(task.id)}>
+                                            <Clear color="primary"/>
+                                        </DeleteButton>
+                                    </Task>
+                                </ul>
+                            )
+                        } else {
+                            return null
+                        }
+                    })}
+                </div>
+                <div id="friday">
+                    <WeekName>Sexta-Feira</WeekName>
+                    {tasks && tasks.map((task, index) => {
+                        if (task.day === "Sexta") {
+                            return ( 
+                                <ul>
+                                    <Task 
+                                        completed={task.completed} 
+                                        onClick={() => selectTask(task.id)}
+                                        key={index}
+                                        data-testid="item-task" 
+                                    >
+                                        {task.text}
+                                        <DeleteButton data-testid="delete" onClick={() => deleteTask(task.id)}>
+                                            <Clear color="primary"/>
+                                        </DeleteButton>
+                                    </Task>
+                                </ul>
+                            )
+                        } else {
+                            return null
+                        }
+                    })}
+                </div>
+                <div id="saturday">
+                    <WeekName>Sábado</WeekName>
+                    {tasks && tasks.map((task, index) => {
+                        if (task.day === "Sábado") {
+                            return ( 
+                                <ul>
+                                    <Task 
+                                        completed={task.completed} 
+                                        onClick={() => selectTask(task.id)} 
+                                        key={index}
+                                        data-testid="item-task"
+                                    >
+                                        {task.text}
+                                        <DeleteButton data-testid="delete" onClick={() => deleteTask(task.id)}>
+                                            <Clear color="primary"/>
+                                        </DeleteButton>
+                                    </Task>
+                                </ul>
+                            )
+                        } else {
+                            return null
+                        }
+                    })}
+                </div>
+                <div id="sunday">
+                    <WeekName>Domingo</WeekName>
+                    {tasks && tasks.map((task, index) => {
+                        if (task.day === "Domingo") {
+                            return ( 
+                                <ul>
+                                    <Task 
+                                        completed={task.completed} 
+                                        onClick={() => selectTask(task.id )} 
+                                        key={index}
+                                        data-testid="item-task"
+                                    >
+                                        {task.text}
+                                        <DeleteButton data-testid="delete" onClick={() => deleteTask(task.id)}>
+                                            <Clear color="primary"/>
+                                        </DeleteButton>
+                                    </Task>
+                                </ul>
+                            )
+                        } else {
+                            return null
+                        }
+                    })}
+                </div>
+            </MuiThemeProvider>
         </Main>
     </MainContainer>
   );
