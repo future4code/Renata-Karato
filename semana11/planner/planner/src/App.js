@@ -26,6 +26,7 @@ const MyTheme = createMuiTheme({
 const MainContainer = styled.div`
   background-color: #06D6A0; /*caribbean green*/
   max-width: 100vw;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   padding: 10px 0;
