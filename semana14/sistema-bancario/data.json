@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Renata Karato",
+    "CPF": 36137662802,
+    "birthday": "1989-04-06T03:00:00.000Z"
+  },
+  {
+    "name": "Maria da Silva",
+    "CPF": 1234567890,
+    "birthday": "1982-05-25T03:00:00.000Z"
+  },
+  {
+    "name": "João dos Santos",
+    "CPF": 22205770829,
+    "birthday": "1951-03-27T02:00:00.000Z"
+  }
+]
