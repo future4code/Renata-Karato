@@ -1,0 +1,27 @@
+{
+  "name": "aula-back-arquitetura",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no teste specified\" && exit1",
+    "start": "tsc && node build/index.js",
+    "exercicio1": "tsc && node build/exercicio1.js",
+    "exercicio2": "tsc && node build/exercicio2.js",
+    "exercicio3": "tsc && node build/exercicio3.js",
+    "exercicio4": "tsc && node build/exercicio4.js",
+    "exercicio5": "tsc && node build/exercicio5.js",
+    "exercicio6": "tsc && node build/exercicio6.js",
+    "exercicio7": "tsc && node build/exercicio7.js"
+    },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/node": "^13.7.7",
+    "axios": "^0.19.2",
+    "ts-node": "^8.6.2",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "typescript": "^3.9.7"
+  }
+}
