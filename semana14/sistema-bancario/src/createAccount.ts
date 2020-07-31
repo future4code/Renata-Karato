@@ -13,18 +13,6 @@ const bufferArchive: Buffer = fs.readFileSync("./data.json");
 const textArchive: string = bufferArchive.toString();
 const allAccounts: newClient[] = textArchive ? JSON.parse(textArchive) : [];
 
-/* const checkCpf = (cpf: number): boolean => {
-    const data: newClient[] = JSON.parse(fs.readFileSync('./data.json').toString());
-    for (let client of data) {
-      if (client.CPF === cpf) {
-        return true
-      } 
-    }
-    return false;
-  };
-
-checkCpf(36137662802) */
-
 const createAccount = (
     newAccountName: string = process.argv[3],
     newAccountCPF: number = Number(process.argv[4]),
@@ -74,6 +62,6 @@ const createAccount = (
 
 createAccount(
     "Arthur Comparoni",
-    36137662802,
-    moment("06/04/1989", "DD/MM/YYYY")
+    51520241322,
+    moment("16/12/2001", "DD/MM/YYYY")
 ) 
