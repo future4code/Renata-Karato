@@ -47,7 +47,7 @@ const addBalance = (accountName = process.argv[3], accountCPF = Number(process.a
         console.log(`Erro: ${error.message}`);
     }
 };
-addBalance("Renata Karato", 361376628021, 50);
-// addBalance("Ricardo da Silva", 22205770829, 100)
+// addBalance("Renata Karato", 361376628021, 50)
+//addBalance("Ricardo da Silva", 22205770829, 300)
 // addBalance("Adriana Meirelles", 98760785853, 125)
 // addBalance("Rodrigo Rodrigues", 32073755887, 25)

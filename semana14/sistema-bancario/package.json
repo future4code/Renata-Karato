@@ -11,7 +11,7 @@
     "get-balance": "tsc && node build/getBalance.js",
     "add-balance": "tsc && node build/addBalance.js",
     "pay-bill": "tsc && node build/payBill.js",
-    "intern-transfer": "tsc && node build/internTransfer.js"
+    "transfer": "tsc && node build/internTransfer.js"
   },
   "author": "",
   "license": "ISC",
