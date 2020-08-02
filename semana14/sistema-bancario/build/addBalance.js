@@ -28,41 +28,26 @@ moment_1.default.locale("pt-br");
 const bufferArchive = fs.readFileSync("./data.json");
 const textArchive = bufferArchive.toString();
 const allAccounts = textArchive ? JSON.parse(textArchive) : [];
-const createAccount = (newAccountName = process.argv[3], newAccountCPF = Number(process.argv[4]), newAccountBirthday = moment_1.default(process.argv[5])) => {
+const addBalance = (accountName = process.argv[3], accountCPF = Number(process.argv[4]), deposit = Number(process.argv[6])) => {
     try {
-        const today = moment_1.default();
-        const checkAge = today.diff(newAccountBirthday, "years");
         const data = JSON.parse(fs.readFileSync('./data.json').toString());
-        if (!newAccountName || !newAccountCPF || !newAccountBirthday) {
-            console.log("Necessário preencher todos os campos!");
-            return;
-        }
-        for (let client of data) {
-            if (client.CPF === newAccountCPF) {
-                console.log("CPF já cadastrado!");
-                return;
-            }
-        }
-        if (checkAge < 18) {
-            console.log("Cliente precisa ter mais de 18 anos para criar uma conta.");
-            return;
-        }
-        if (newAccountName && newAccountBirthday && newAccountBirthday) {
-            allAccounts.push({
-                name: newAccountName,
-                CPF: newAccountCPF,
-                birthday: newAccountBirthday,
-                balance: 0,
-                operations: []
-            });
-            const updateListAccounts = JSON.stringify(allAccounts, null, 2);
+        const accountIndex = allAccounts.findIndex(client => client.name === accountName && client.CPF === accountCPF);
+        if (accountIndex > -1 && deposit > 0) {
+            data[accountIndex] = Object.assign(Object.assign({}, data[accountIndex]), { balance: data[accountIndex].balance + deposit, operations: [...data[accountIndex].operations, {
+                        value: deposit,
+                        date: moment_1.default(),
+                        description: (`Depósito de R$${deposit}`)
+                    }] });
+            const updateListAccounts = JSON.stringify(data, null, 2);
             fs.writeFileSync("./data.json", updateListAccounts);
-            console.log("Conta criada com sucesso!");
-            return;
+            console.log(`Saldo de R$${deposit} adicionado com sucesso!`);
+        }
+        else {
+            console.log("Dados não conferem.");
         }
     }
     catch (error) {
         console.log(`Erro: ${error.message}`);
     }
 };
-createAccount("Rodrigo Rodrigues", 32073755887, moment_1.default("09/01/1995", "DD/MM/YYYY"));
+addBalance("Rodrigo Rodrigues", 32073755887, 25);

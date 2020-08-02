@@ -6,7 +6,10 @@
   "scripts": {
     "start": "ts-node ./src/index.ts",
     "build": "tsc && node ./build/index.js",
-    "create-account": "tsc && node build/createAccount.js"
+    "create-account": "tsc && node build/createAccount.js",
+    "get-all-accounts": "tsc && node build/getAllAccounts.js",
+    "get-balance": "tsc && node build/getBalance.js",
+    "add-balance": "tsc && node build/addBalance.js"
   },
   "author": "",
   "license": "ISC",

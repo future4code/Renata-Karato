@@ -20,7 +20,7 @@ const getAllAccounts = (allAccounts: newClient[]): void => {
         const date: moment.Moment = moment(client.birthday)
 
         console.log(`
-        Nome: ${client.name};
+        Nome: ${client.name}
         CPF: ${client.CPF}
         Data de Nascimento: ${date.format("DD/MM/YYYY")}
         `)
