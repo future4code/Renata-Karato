@@ -33,7 +33,7 @@ const addBalance = (accountName = process.argv[3], accountCPF = Number(process.a
             data[accountIndex] = Object.assign(Object.assign({}, data[accountIndex]), { balance: data[accountIndex].balance + deposit, operations: [...data[accountIndex].operations, {
                         value: deposit,
                         date: moment_1.default(),
-                        description: (`Depósito de R$${deposit}`)
+                        description: (`Depósito de dinheiro no valor de R$${deposit}`)
                     }] });
             const updateListAccounts = JSON.stringify(data, null, 2);
             fs.writeFileSync("./data.json", updateListAccounts);
@@ -50,4 +50,4 @@ const addBalance = (accountName = process.argv[3], accountCPF = Number(process.a
 // addBalance("Renata Karato", 361376628021, 50)
 //addBalance("Ricardo da Silva", 22205770829, 300)
 // addBalance("Adriana Meirelles", 98760785853, 125)
-// addBalance("Rodrigo Rodrigues", 32073755887, 25)
+addBalance("Rodrigo Rodrigues", 32073755887, 100);

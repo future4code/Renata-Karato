@@ -65,4 +65,4 @@ const createAccount = (newAccountName = process.argv[3], newAccountCPF = Number(
         console.log(`Erro: ${error.message}`);
     }
 };
-createAccount("Rodrigo Rodrigues", 32073755887, moment_1.default("09/01/1995", "DD/MM/YYYY"));
+createAccount("Hello Kitty", 32073755887, moment_1.default("09/01/1995", "DD/MM/YYYY"));

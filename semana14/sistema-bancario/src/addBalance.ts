@@ -33,7 +33,7 @@ const addBalance = (
                 operations: [...data[accountIndex].operations, {
                     value: deposit,
                     date: moment(),
-                    description: (`Depósito de R$${deposit}`)
+                    description: (`Depósito de dinheiro no valor de R$${deposit}`)
                 }]
             }
        
@@ -51,4 +51,4 @@ const addBalance = (
 // addBalance("Renata Karato", 361376628021, 50)
 //addBalance("Ricardo da Silva", 22205770829, 300)
 // addBalance("Adriana Meirelles", 98760785853, 125)
-// addBalance("Rodrigo Rodrigues", 32073755887, 25)
+addBalance("Rodrigo Rodrigues", 32073755887, 100)

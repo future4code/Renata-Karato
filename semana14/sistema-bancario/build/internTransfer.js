@@ -42,12 +42,15 @@ const internTransfer = (accountName, accountCPF, sendName, sendCPF, sendValue) =
                     fs.writeFileSync("./data.json", updateListAccounts);
                     console.log(`Transferência de R$${sendValue} realizada com sucesso!`);
                 }
+                else if (sendValue > account.balance) {
+                    console.log("Não foi possível realizar transação. Saldo insuficiente.");
+                }
             }
             else if ((account.name === accountName && account.CPF !== accountCPF) || (account.name !== accountName && account.CPF === accountCPF)) {
                 console.log("Dados não conferem: nome e/ou CPF inválido.");
             }
             if (accountIndex2 > -1 && account.name === sendName && account.CPF === sendCPF) {
-                if (sendValue > 0) {
+                if (sendValue > 0 && sendValue <= data[accountIndex].balance) {
                     data[accountIndex2] = Object.assign(Object.assign({}, data[accountIndex2]), { balance: data[accountIndex2].balance + sendValue, operations: [...data[accountIndex2].operations, {
                                 value: sendValue,
                                 date: moment_1.default(),
@@ -56,6 +59,9 @@ const internTransfer = (accountName, accountCPF, sendName, sendCPF, sendValue) =
                     const updateListAccounts = JSON.stringify(data, null, 2);
                     fs.writeFileSync("./data.json", updateListAccounts);
                     console.log(`Transferência de R$${sendValue} recebida!`);
+                }
+                else if (sendValue > data[accountIndex].balance) {
+                    console.log(`Não foi possível receber transferência de ${accountName}`);
                 }
             }
             else if ((account.name === sendName && account.CPF !== sendCPF) || (account.name !== sendName && account.CPF === sendCPF)) {
@@ -67,4 +73,4 @@ const internTransfer = (accountName, accountCPF, sendName, sendCPF, sendValue) =
         console.log(`Erro: ${error.message}`);
     }
 };
-internTransfer("Ricardo da Silva", 22205770829, "Renata Karato", 36137662802, 80);
+internTransfer("Ricardo da Silva", 22205770829, "Renata Karato", 36137662802, 200);

@@ -71,7 +71,7 @@ const createAccount = (
 };
 
 createAccount(
-    "Rodrigo Rodrigues",
+    "Hello Kitty",
     32073755887,
     moment("09/01/1995", "DD/MM/YYYY")
 )
