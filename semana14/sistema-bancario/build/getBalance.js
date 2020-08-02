@@ -25,24 +25,26 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const moment_1 = __importDefault(require("moment"));
 const fs = __importStar(require("fs"));
 moment_1.default.locale("pt-br");
-const bufferArchive = fs.readFileSync("./data.json");
-const textArchive = bufferArchive.toString();
-const allAccounts = textArchive ? JSON.parse(textArchive) : [];
 const getBalance = (accountName = process.argv[3], accountCPF = Number(process.argv[4])) => {
     try {
         const data = JSON.parse(fs.readFileSync('./data.json').toString());
-        const accountIndex = allAccounts.findIndex(client => client.name === accountName && client.CPF === accountCPF);
+        const accountIndex = data.findIndex(client => client.name === accountName && client.CPF === accountCPF);
         if (accountIndex > -1) {
-            for (let client of data) {
+            data.find((client) => {
                 if (client.name === accountName && client.CPF === accountCPF) {
                     console.log(`O saldo da sua conta é de R$${client.balance}`);
-                    return;
                 }
-            }
+            });
+        }
+        else if (accountIndex === -1) {
+            console.log("Dados não conferem: nome e/ou CPF inválido.");
         }
     }
     catch (error) {
         console.log(`Erro: ${error.message}`);
     }
 };
-getBalance("Adriana Meirelles", 98760785853);
+getBalance("Renata Karato", 36137662802);
+// getBalance("Ricardo da Silva", 22205770829)
+// getBalance("Adriana Meirelles", 98760785853)
+// getBalance("Rodrigo Rodrigues", 32073755887)

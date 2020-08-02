@@ -17,10 +17,6 @@ type account = {
     operations: transactions[],
 }
 
-const bufferArchive: Buffer = fs.readFileSync("./data.json");
-const textArchive: string = bufferArchive.toString();
-const allAccounts: account[] = textArchive ? JSON.parse(textArchive) : [];
-
 const addBalance = (
     accountName: string = process.argv[3],
     accountCPF: number = Number(process.argv[4]),
@@ -29,7 +25,7 @@ const addBalance = (
     try {
         const data: account[] = JSON.parse(fs.readFileSync('./data.json').toString());
         
-        const accountIndex = allAccounts.findIndex(client => client.name === accountName && client.CPF === accountCPF)
+        const accountIndex = data.findIndex(client => client.name === accountName && client.CPF === accountCPF)
         if (accountIndex > -1 && deposit > 0) {
             data[accountIndex] = {
                 ...data[accountIndex],
@@ -44,12 +40,15 @@ const addBalance = (
         const updateListAccounts: string = JSON.stringify(data, null, 2);
         fs.writeFileSync("./data.json", updateListAccounts);
         console.log(`Saldo de R$${deposit} adicionado com sucesso!`)
-        } else {
-            console.log("Dados não conferem.")
+        } else if (accountIndex === -1) {
+            console.log("Não foi possível realizar o depósito. Nome e/ou CPF inválido.")
         }
     } catch (error) {
         console.log(`Erro: ${error.message}`)
     }
 }
 
-addBalance("Rodrigo Rodrigues", 32073755887, 25)
+addBalance("Renata Karato", 361376628021, 50)
+// addBalance("Ricardo da Silva", 22205770829, 100)
+// addBalance("Adriana Meirelles", 98760785853, 125)
+// addBalance("Rodrigo Rodrigues", 32073755887, 25)

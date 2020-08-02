@@ -9,7 +9,9 @@
     "create-account": "tsc && node build/createAccount.js",
     "get-all-accounts": "tsc && node build/getAllAccounts.js",
     "get-balance": "tsc && node build/getBalance.js",
-    "add-balance": "tsc && node build/addBalance.js"
+    "add-balance": "tsc && node build/addBalance.js",
+    "pay-bill": "tsc && node build/payBill.js",
+    "intern-transfer": "tsc && node build/internTransfer.js"
   },
   "author": "",
   "license": "ISC",

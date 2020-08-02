@@ -25,17 +25,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const moment_1 = __importDefault(require("moment"));
 const fs = __importStar(require("fs"));
 moment_1.default.locale("pt-br");
-const bufferArchive = fs.readFileSync("./data.json");
-const textArchive = bufferArchive.toString();
-const allAccounts = textArchive ? JSON.parse(textArchive) : [];
-const getAllAccounts = (allAccounts) => {
-    allAccounts.forEach((client) => {
+const data = JSON.parse(fs.readFileSync('./data.json').toString());
+const getAllAccounts = () => {
+    data.forEach((client) => {
         const date = moment_1.default(client.birthday);
         console.log(`
-        Nome: ${client.name}
-        CPF: ${client.CPF}
-        Data de Nascimento: ${date.format("DD/MM/YYYY")}
-        `);
+                Nome: ${client.name}
+                CPF: ${client.CPF}
+                Data de Nascimento: ${date.format("DD/MM/YYYY")}
+                Saldo Bancário: R$${client.balance}
+                Extrato: ${client.operations}
+            `);
     });
 };
-getAllAccounts(allAccounts);
+getAllAccounts();

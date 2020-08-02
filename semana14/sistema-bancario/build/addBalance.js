@@ -25,13 +25,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const moment_1 = __importDefault(require("moment"));
 const fs = __importStar(require("fs"));
 moment_1.default.locale("pt-br");
-const bufferArchive = fs.readFileSync("./data.json");
-const textArchive = bufferArchive.toString();
-const allAccounts = textArchive ? JSON.parse(textArchive) : [];
 const addBalance = (accountName = process.argv[3], accountCPF = Number(process.argv[4]), deposit = Number(process.argv[6])) => {
     try {
         const data = JSON.parse(fs.readFileSync('./data.json').toString());
-        const accountIndex = allAccounts.findIndex(client => client.name === accountName && client.CPF === accountCPF);
+        const accountIndex = data.findIndex(client => client.name === accountName && client.CPF === accountCPF);
         if (accountIndex > -1 && deposit > 0) {
             data[accountIndex] = Object.assign(Object.assign({}, data[accountIndex]), { balance: data[accountIndex].balance + deposit, operations: [...data[accountIndex].operations, {
                         value: deposit,
@@ -42,12 +39,15 @@ const addBalance = (accountName = process.argv[3], accountCPF = Number(process.a
             fs.writeFileSync("./data.json", updateListAccounts);
             console.log(`Saldo de R$${deposit} adicionado com sucesso!`);
         }
-        else {
-            console.log("Dados não conferem.");
+        else if (accountIndex === -1) {
+            console.log("Não foi possível realizar o depósito. Nome e/ou CPF inválido.");
         }
     }
     catch (error) {
         console.log(`Erro: ${error.message}`);
     }
 };
-addBalance("Rodrigo Rodrigues", 32073755887, 25);
+addBalance("Renata Karato", 361376628021, 50);
+// addBalance("Ricardo da Silva", 22205770829, 100)
+// addBalance("Adriana Meirelles", 98760785853, 125)
+// addBalance("Rodrigo Rodrigues", 32073755887, 25)
