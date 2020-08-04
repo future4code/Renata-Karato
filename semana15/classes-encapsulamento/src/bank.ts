@@ -1,57 +1,57 @@
 import moment from "moment";
 
-import UserAccount from "./userAccount";
+import { UserAccount } from "./UserAccount";
 import { JSONFileManager } from "./JSONFileManager";
 
-export default class bank {
- private accounts: UserAccount[]
- private fileManager: JSONFileManager
+export class Bank {
+    private accounts: UserAccount[] = []
+    private fileManager: JSONFileManager = new JSONFileManager("./data.json")
 
-constructor(
-    accounts: UserAccount[],
-    fileManager: JSONFileManager
-) {
-    this.accounts = accounts
-    this.fileManager = fileManager
-}
+    constructor() {
+        const fileData: any = this.fileManager.readDatabase()
+        this.accounts = fileData.map((item : any) => {
+            return new UserAccount(
+                item.name,
+                item.cpf,
+                item.birthday,
+                item.balance,
+                item.operations
+            )}
+        )
+    }
+   
+    createAccount (name: string, cpf:string, birthday:string) : void {
+        const duplicateCpf: UserAccount | undefined = this.accounts.find((account) => {
+            return account.getCPF() === cpf }
+        )
+            
+        if (duplicateCpf) {
+            throw new Error ("CPF informado já possui uma conta cadastrada.")
+        }
 
-public createAccount (userAccount: UserAccount) : void {
-    
-    const newAccount : UserAccount = new UserAccount (
-        userAccount.getName(), userAccount.getCPF(), userAccount.getBirthday()
-    )
+        const birthdayDateAsObject = moment(birthday, "DD/MM/YYYY")
+        const age = moment().diff(birthdayDateAsObject, "years")
 
-    const data :JSONFileManager = new JSONFileManager("./data.json")
-    const allAccounts: any = this.fileManager.readDatabase()
+        if (age < 18) {
+            throw new Error("Usuário deve ter mais de 18 anos.")
+        }
 
-    const today: moment.Moment = moment()
-    const checkAge = today.diff(userAccount.getBirthday(), "years")
+        this.accounts.push(
+            new UserAccount (name, cpf, birthday)
+        )
 
-    if(!userAccount.getName() || !userAccount.getCPF() || !userAccount.getBirthday()) {
-        console.log("Necessário preencher todos os campos!");
-    } 
+        this.fileManager.writeToDatabase(this.accounts)
+    }
 
-    for (let client of this.accounts) {
-        if (client.getCPF() === userAccount.getCPF()) {
-            console.log("CPF já cadastrado!")
+    getBalance(name: string, cpf: string) : number {
+        const userAccount: UserAccount | undefined = this.accounts.find((account) => {
+            return account.getCPF() === cpf && account.getName() === name }
+        )
+
+        if (userAccount) {
+            return userAccount.getBalance()
+        } else {
+            throw new Error("Usuário não encontrado.")
         }
     }
-    
-    if (checkAge < 18) {
-        console.log("Cliente precisa ter mais de 18 anos para criar uma conta.")
-    } 
-    
-    if(userAccount.getName && userAccount.getCPF && userAccount.getBirthday) {
-        allAccounts.push(newAccount);
-        data.writeToDatabase(allAccounts)
-    }
-}
-
-//  public getAllAcounts() : UserAccount[] {
-
-//  }
-
-//  public getAccountByNameAndCPF(name: string, cpf: number) : UserAccount | undefined {
-
-//  }
 }
