@@ -1,0 +1,124 @@
+[
+  {
+    "name": "Renata Karato",
+    "CPF": 36137662802,
+    "birthday": "1989-04-06T03:00:00.000Z",
+    "balance": 130,
+    "operations": [
+      {
+        "value": 100,
+        "date": "2020-08-02T17:01:53.349Z",
+        "description": "Depósito de R$100"
+      },
+      {
+        "value": 50,
+        "date": "2020-08-02T17:02:28.469Z",
+        "description": "Depósito de R$50"
+      },
+      {
+        "value": 20,
+        "date": "2020-08-04T03:00:00.000Z",
+        "description": "Pagamento de conta de luz no valor de R$20"
+      },
+      {
+        "value": 30,
+        "date": "2020-08-04T03:00:00.000Z",
+        "description": "Pagamento de uber no valor de R$30"
+      },
+      {
+        "value": 50,
+        "date": "2020-08-02T17:14:36.419Z",
+        "description": "Depósito de R$50"
+      },
+      {
+        "value": 50,
+        "date": "2020-08-02T17:23:47.089Z",
+        "description": "Depósito de R$50"
+      },
+      {
+        "value": 50,
+        "date": "2020-08-03T03:00:00.000Z",
+        "description": "Pagamento de cartão de crédito no valor de R$50"
+      },
+      {
+        "value": 50,
+        "date": "2020-08-03T03:00:00.000Z",
+        "description": "Pagamento de almoço no valor de R$50"
+      },
+      {
+        "value": 50,
+        "date": "2020-08-02T19:50:34.306Z",
+        "description": "Transferência de R$50 enviada para a conta de Adriana Meirelles"
+      },
+      {
+        "value": 80,
+        "date": "2020-08-02T20:06:22.581Z",
+        "description": "Transferência de R$80 recebida de Ricardo da Silva"
+      }
+    ]
+  },
+  {
+    "name": "Ricardo da Silva",
+    "CPF": 22205770829,
+    "birthday": "1982-05-25T03:00:00.000Z",
+    "balance": 120,
+    "operations": [
+      {
+        "value": 300,
+        "date": "2020-08-02T19:52:20.239Z",
+        "description": "Depósito de R$300"
+      },
+      {
+        "value": 100,
+        "date": "2020-08-02T19:53:31.951Z",
+        "description": "Transferência de R$100 enviada para a conta de Rodrigo Rodrigues"
+      },
+      {
+        "value": 80,
+        "date": "2020-08-02T20:06:22.603Z",
+        "description": "Transferência de R$80 enviada para a conta de Renata Karato"
+      }
+    ]
+  },
+  {
+    "name": "Adriana Meirelles",
+    "CPF": 98760785853,
+    "birthday": "1951-03-27T02:00:00.000Z",
+    "balance": 100,
+    "operations": [
+      {
+        "value": 50,
+        "date": "2020-08-02T19:50:34.348Z",
+        "description": "Transferência de R$50 recebida de Renata Karato"
+      },
+      {
+        "value": 50,
+        "date": "2020-08-02T20:04:41.680Z",
+        "description": "Transferência de R$50 recebida de Rodrigo Rodrigues"
+      }
+    ]
+  },
+  {
+    "name": "Rodrigo Rodrigues",
+    "CPF": 32073755887,
+    "birthday": "1995-01-09T02:00:00.000Z",
+    "balance": 150,
+    "operations": [
+      {
+        "value": 100,
+        "date": "2020-08-02T19:53:31.974Z",
+        "description": "Transferência de R$100 recebida de Ricardo da Silva"
+      },
+      {
+        "value": 50,
+        "date": "2020-08-02T20:04:41.695Z",
+        "description": "Transferência de R$50 enviada para a conta de Adriana Meirelles"
+      },
+      {
+        "value": 100,
+        "date": "2020-08-02T20:19:35.086Z",
+        "description": "Depósito de dinheiro no valor de R$100"
+      }
+    ]
+  }
+]
