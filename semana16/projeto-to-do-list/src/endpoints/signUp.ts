@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { connection, userTableName } from '../index'
 
-export default async function signup(req: Request, res: Response) {
+export default async function signUp(req: Request, res: Response) {
     try {
         const { name, nickname, email } = req.body
         const id = Date.now() + Math.random().toString()
