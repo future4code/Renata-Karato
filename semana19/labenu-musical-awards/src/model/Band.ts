@@ -26,15 +26,3 @@ export class Band{
         return new Band(band.id, band.name, band.music_genre, band.responsible)
     }
 }
-
-export interface BandInputDTO {
-    bandId: string,
-    bandName: string
-}
-
-export type BandAndInfoOutputDTO = {
-    id: string;
-    name: string;
-    music_genre: string;
-    responsible: string;
-}

@@ -1,5 +1,4 @@
 import { IdGenerator } from "../services/IdGenerator";
-import { Band } from "../model/Band";
 import { BandDatabase } from "../data/BandDatabase";
 import { HashManager } from "../services/HashManager";
 import { Authenticator } from "../services/Authenticator";
