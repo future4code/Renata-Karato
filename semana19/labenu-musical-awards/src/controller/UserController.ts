@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { UserInputDTO } from "../model/User";
 import { UserBusiness } from "../business/UserBusiness";
 import { BaseDatabase } from "../data/BaseDatabase";
 import { UserDatabase } from "../data/UserDatabase";
@@ -16,39 +15,47 @@ export class UserController {
         new Authenticator()
     );
         
-    async signup(req: Request, res: Response) {
+    public async signup(req: Request, res: Response) {
         try {
-            const input: UserInputDTO = {
-                name: req.body.name,
-                email: req.body.email,
-                password: req.body.password,
-                role: req.body.role
-            }
+            const result = await UserController.UserBusiness.createUser(
+                req.body.name,
+                req.body.email,
+                req.body.password,
+                req.body.role
+            );
 
-            const token = await UserController.UserBusiness.createUser(input)
-
-            res.status(200).send({ token });
+            res
+                .status(200)
+                .send(result);
 
         } catch (error) {
-            res.status(400).send({ error: error.message });
+            res
+                .status(error.errorCode || 400)
+                .send({ 
+                     message: error.message
+                });
         }
-
         await BaseDatabase.destroyConnection();
     }
 
     async login(req: Request, res: Response) {
-        try {
-            const email =  req.body.email;
-            const password = req.body.password;
-            
-            const token = await UserController.UserBusiness.getUserByEmail(email, password);
+        const email =  req.body.email;
+        const password = req.body.password;
 
-            res.status(200).send({ token });
+        try {
+            const result = await UserController.UserBusiness.getUserByEmail(email, password);
+
+            res
+                .status(200)
+                .send(result);
 
         } catch (error) {
-            res.status(400).send({ error: error.message });
+            res
+                .status(error.errorCode || 400)
+                .send({
+                    error: error.message 
+                });
         }
         await BaseDatabase.destroyConnection();
     }
-
 }

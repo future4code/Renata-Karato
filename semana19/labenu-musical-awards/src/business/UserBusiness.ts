@@ -1,8 +1,10 @@
-import { UserInputDTO, LoginInputDTO, User, stringToUserRole } from "../model/User";
+import { User, stringToUserRole } from "../model/User";
 import { UserDatabase } from "../data/UserDatabase";
 import { IdGenerator } from "../services/IdGenerator";
 import { HashManager } from "../services/HashManager";
 import { Authenticator } from "../services/Authenticator";
+import { InvalidParameterError } from "../error/InvalidParameterError";
+import { NotFoundError } from "../error/NotFoundError";
 
 export class UserBusiness {
     constructor(
@@ -13,47 +15,50 @@ export class UserBusiness {
     ) {}
 
     public async createUser(
-        user: UserInputDTO
+        name: string,
+        email: string,
+        password: string,
+        role: string
     ) {
 
-        if (!user.name || !user.email || !user.password || !user.role) {
-            throw new Error("Missing input");
+        if (!name || !email || !password || !role) {
+            throw new InvalidParameterError("Missing input");
         }
 
-        if (user.email.indexOf("@") === -1) {
-            throw new Error("Invalid email");
+        if (email.indexOf("@") === -1) {
+            throw new InvalidParameterError("Invalid email");
         }
 
-        if (user.password.length < 6) {
-            throw new Error("Invalid password");
+        if (password.length < 6) {
+            throw new InvalidParameterError("Invalid password");
         }
 
         const id = this.idGenerator.generate();
 
-        const hashPassword = await this.hashManager.hash(user.password);
+        const hashPassword = await this.hashManager.hash(password);
 
         await this.userDatabase.createUser(
-            new User (id, user.name, user.email, hashPassword, stringToUserRole(user.role))
+            new User (id, name, email, hashPassword, stringToUserRole(role))
         );
 
         const accessToken = this.authenticator.generateToken({ 
             id, 
-            role: user.role 
+            role
         });
 
         return { accessToken };
     }
 
-    public async getUserByEmail(email: string, password:string) :Promise<string> {
+    public async getUserByEmail(email: string, password:string) {
 
         if (!email || !password) {
-            throw new Error("Missing input");
+            throw new InvalidParameterError("Missing input");
         }
       
         const user = await this.userDatabase.getUserByEmail(email);
 
         if (!user) {
-            throw new Error("User not found");
+            throw new NotFoundError("User not found");
         }
 
         const hashCompare = await this.hashManager.compare(
@@ -62,7 +67,7 @@ export class UserBusiness {
         );
 
         if (!hashCompare) {
-            throw new Error("Invalid Password!");
+            throw new InvalidParameterError("Invalid Password!");
         }
 
         const token = this.authenticator.generateToken({ 
@@ -70,6 +75,6 @@ export class UserBusiness {
             role: user.getRole()
         });
 
-        return token;
+        return { token };
     }
 }

@@ -1,3 +1,5 @@
+import { InvalidParameterError } from "../error/InvalidParameterError";
+
 export class User{
     constructor(
     private id: string,
@@ -26,30 +28,6 @@ export class User{
     public getRole() :UserRole {
         return this.role;
     }
-
-    public setId(id: string){
-        this.id = id;
-    }
-
-    public setName(name: string){
-        this.name = name;
-    }
-
-    public setEmail(email: string){
-        this.email = email;
-    }
-
-    public setPassword(password: string){
-        this.password = password;
-    }
-
-    public setRole(role: UserRole){
-        this.role = role;
-    }
-
-    // static toUserModel(user: any): User {
-    //     return new User(user.id, user.name, user.email, user.password, User.stringToUserRole(user.role));
-    // }
 }
 
 export const stringToUserRole = (input: string): UserRole => {
@@ -59,21 +37,9 @@ export const stringToUserRole = (input: string): UserRole => {
         case "ADMIN":
             return UserRole.ADMIN;
         default:
-            throw new Error("Invalid user role");
+            throw new InvalidParameterError("Invalid user role");
     }
-}
-
-export interface UserInputDTO{
-    email: string;
-    password: string;
-    name: string;
-    role: string;
-}
-
-export interface LoginInputDTO{
-    email: string;
-    password: string;
-}
+};
 
 export enum UserRole{
     NORMAL = "NORMAL",
