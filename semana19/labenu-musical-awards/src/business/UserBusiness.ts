@@ -67,7 +67,7 @@ export class UserBusiness {
         );
 
         if (!hashCompare) {
-            throw new InvalidParameterError("Invalid Password!");
+            throw new InvalidParameterError("Invalid password");
         }
 
         const token = this.authenticator.generateToken({ 
