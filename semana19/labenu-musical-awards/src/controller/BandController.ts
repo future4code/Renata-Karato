@@ -5,6 +5,7 @@ import { Authenticator } from "../services/Authenticator";
 import { BandDatabase } from "../data/BandDatabase";
 import { BandBusiness } from "../business/BandBusiness";
 import { BaseDatabase } from "../data/BaseDatabase";
+import { Band } from "../model/Band";
 
 export class BandController {
 
@@ -26,7 +27,7 @@ export class BandController {
 
             const idGenerator = new IdGenerator();
             const id = idGenerator.generate();
-            
+
             const authenticator = new Authenticator();
             const authenticationData = authenticator.getData(token)
             
@@ -50,9 +51,38 @@ export class BandController {
         } catch (error) {
             res
                 .status(400)
-                .send({error: error.messagr})
+                .send({error: error.message})
         }
         await BaseDatabase.destroyConnection();
     }
 
+    public async getBandById (req: Request, res: Response) {
+        try {
+            const token = req.headers.authorization as string;
+            const bandId = req.params.id as any;
+
+            const authenticator = new Authenticator();
+            authenticator.getData(token)
+
+            const bandDatabase = new BandDatabase();
+            const band = await bandDatabase.getBandById(bandId);
+
+            res
+                .status(200)
+                .send({
+                    id: band.getId(),
+                    name: band.getName(),
+                    music_genre: band.getMusicGenre(),
+                    responsible: band.getResponsible()
+                })
+
+        } catch(error) {
+            res
+                .status(400)
+                .send({
+                    message: error.message
+                })
+        }
+        await BaseDatabase.destroyConnection();
+    }
 }

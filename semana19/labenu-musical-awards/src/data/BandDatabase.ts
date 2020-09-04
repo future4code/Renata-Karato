@@ -31,4 +31,32 @@ export class BandDatabase extends BaseDatabase {
         })
         .into(this.TABLE_NAME)
     }
+
+    public async getBandById(
+        bandId: string
+    ): Promise<Band> {
+        const result = await this.getConnection()
+            .select("*")
+            .from(this.TABLE_NAME)
+            .where({id: bandId});
+
+        return Band.toBandModel(result[0]);
+    }
+
+    public async getBandByName(
+        name:string
+    ): Promise<Band[]> {
+        const result = await this.getConnection()
+            .select("*")
+            .from(this.TABLE_NAME)
+            .where({name: name});
+
+        const bands :Band[] = [];
+
+        for(let band of result) {
+            bands.push(Band.toBandModel(band));
+        }
+
+        return bands;
+    }
 };

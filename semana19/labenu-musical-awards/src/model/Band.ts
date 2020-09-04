@@ -21,4 +21,20 @@ export class Band{
     public getResponsible() :string {
         return this.responsible;
     }
+
+    static toBandModel(band:any) :Band {
+        return new Band(band.id, band.name, band.music_genre, band.responsible)
+    }
+}
+
+export interface BandInputDTO {
+    bandId: string,
+    bandName: string
+}
+
+export type BandAndInfoOutputDTO = {
+    id: string;
+    name: string;
+    music_genre: string;
+    responsible: string;
 }
