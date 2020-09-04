@@ -3,37 +3,39 @@ import { User } from "../model/User";
 
 export class UserDatabase extends BaseDatabase {
 
-  private static TABLE_NAME = "";
+  protected TABLE_NAME :string = "LAMA_Users";
+
+  private toModel(dbModel?: any): User | undefined {
+    return (
+      dbModel &&
+      new User(
+        dbModel.id,
+        dbModel.name,
+        dbModel.email,
+        dbModel.password,
+        dbModel.role
+      )
+    );
+  }
 
   public async createUser(
-    id: string,
-    email: string,
-    name: string,
-    password: string,
-    role: string
+    user: User
   ): Promise<void> {
-    try {
-      await this.getConnection()
-        .insert({
-          id,
-          email,
-          name,
-          password,
-          role
-        })
-        .into(UserDatabase.TABLE_NAME);
-    } catch (error) {
-      throw new Error(error.sqlMessage || error.message);
-    }
+    await super.getConnection().raw(`
+        INSERT INTO ${this.TABLE_NAME} (id, name, email, password, role)
+        VALUES (
+          '${user.getId()}', 
+          '${user.getName()}', 
+          '${user.getEmail()}',
+          '${user.getPassword()}', 
+          '${user.getRole()}'
+        )`);
   }
 
-  public async getUserByEmail(email: string): Promise<User> {
-    const result = await this.getConnection()
-      .select("*")
-      .from(UserDatabase.TABLE_NAME)
-      .where({ email });
-
-    return User.toUserModel(result[0]);
+  public async getUserByEmail(email: string): Promise<User | undefined> {
+    const result = await super.getConnection().raw(`
+      SELECT * from ${this.TABLE_NAME} WHERE email = '${email}'
+      `);
+    return this.toModel(result[0][0]);
   }
-
 }

@@ -1,43 +1,75 @@
-import { UserInputDTO, LoginInputDTO } from "../model/User";
+import { UserInputDTO, LoginInputDTO, User, stringToUserRole } from "../model/User";
 import { UserDatabase } from "../data/UserDatabase";
 import { IdGenerator } from "../services/IdGenerator";
 import { HashManager } from "../services/HashManager";
 import { Authenticator } from "../services/Authenticator";
 
 export class UserBusiness {
+    constructor(
+        private userDatabase: UserDatabase,
+        private idGenerator: IdGenerator,
+        private hashManager: HashManager,
+        private authenticator: Authenticator
+    ) {}
 
-    async createUser(user: UserInputDTO) {
+    public async createUser(
+        user: UserInputDTO
+    ) {
 
-        const idGenerator = new IdGenerator();
-        const id = idGenerator.generate();
+        if (!user.name || !user.email || !user.password || !user.role) {
+            throw new Error("Missing input");
+        }
 
-        const hashManager = new HashManager();
-        const hashPassword = await hashManager.hash(user.password);
+        if (user.email.indexOf("@") === -1) {
+            throw new Error("Invalid email");
+        }
 
-        const userDatabase = new UserDatabase();
-        await userDatabase.createUser(id, user.email, user.name, hashPassword, user.role);
+        if (user.password.length < 6) {
+            throw new Error("Invalid password");
+        }
 
-        const authenticator = new Authenticator();
-        const accessToken = authenticator.generateToken({ id, role: user.role });
+        const id = this.idGenerator.generate();
 
-        return accessToken;
+        const hashPassword = await this.hashManager.hash(user.password);
+
+        await this.userDatabase.createUser(
+            new User (id, user.name, user.email, hashPassword, stringToUserRole(user.role))
+        );
+
+        const accessToken = this.authenticator.generateToken({ 
+            id, 
+            role: user.role 
+        });
+
+        return { accessToken };
     }
 
-    async getUserByEmail(user: LoginInputDTO) {
+    public async getUserByEmail(email: string, password:string) :Promise<string> {
 
-        const userDatabase = new UserDatabase();
-        const userFromDB = await userDatabase.getUserByEmail(user.email);
+        if (!email || !password) {
+            throw new Error("Missing input");
+        }
+      
+        const user = await this.userDatabase.getUserByEmail(email);
 
-        const hashManager = new HashManager();
-        const hashCompare = await hashManager.compare(user.password, userFromDB.getPassword());
+        if (!user) {
+            throw new Error("User not found");
+        }
 
-        const authenticator = new Authenticator();
-        const accessToken = authenticator.generateToken({ id: userFromDB.getId(), role: userFromDB.getRole() });
+        const hashCompare = await this.hashManager.compare(
+            password, 
+            user.getPassword()
+        );
 
         if (!hashCompare) {
             throw new Error("Invalid Password!");
         }
 
-        return accessToken;
+        const token = this.authenticator.generateToken({ 
+            id: user.getId(), 
+            role: user.getRole()
+        });
+
+        return token;
     }
 }

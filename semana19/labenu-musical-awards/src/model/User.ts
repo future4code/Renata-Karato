@@ -7,62 +7,60 @@ export class User{
     private role: UserRole
     ){}
 
-    getId(){
+    public getId() :string {
         return this.id;
     }
 
-    getName(){
+    public getName() :string {
         return this.name
     }
 
-    getEmail(){
+    public getEmail() :string {
         return this.email;
     }
 
-    getPassword(){
+    public getPassword() :string {
         return this.password;
     }
 
-    getRole(){
+    public getRole() :UserRole {
         return this.role;
     }
 
-    setId(id: string){
+    public setId(id: string){
         this.id = id;
     }
 
-    setName(name: string){
+    public setName(name: string){
         this.name = name;
     }
 
-    setEmail(email: string){
+    public setEmail(email: string){
         this.email = email;
     }
 
-    setPassword(password: string){
+    public setPassword(password: string){
         this.password = password;
     }
 
-    setRole(role: UserRole){
+    public setRole(role: UserRole){
         this.role = role;
     }
 
-   static stringToUserRole(input: string): UserRole{
-        switch (input) {
-            case "NORMAL":
-              return UserRole.NORMAL;
-            case "ADMIN":
-              return UserRole.ADMIN;
-            default:
-              throw new Error("Invalid user role");
-          }
+    // static toUserModel(user: any): User {
+    //     return new User(user.id, user.name, user.email, user.password, User.stringToUserRole(user.role));
+    // }
+}
+
+export const stringToUserRole = (input: string): UserRole => {
+    switch (input) {
+        case "NORMAL":
+            return UserRole.NORMAL;
+        case "ADMIN":
+            return UserRole.ADMIN;
+        default:
+            throw new Error("Invalid user role");
     }
-
-    static toUserModel(user: any): User {
-        return new User(user.id, user.name, user.email, user.password, User.stringToUserRole(user.role));
-      }
-
-
 }
 
 export interface UserInputDTO{
