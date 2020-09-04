@@ -21,26 +21,4 @@ export class Band{
     public getResponsible() :string {
         return this.responsible;
     }
-
-    public setId(id: string) {
-        this.id = id;
-    }
-
-    public setName(name:string) {
-        this.name = name;
-    }
-
-    public setMusicGenre(music_genre: string) {
-        this.music_genre = music_genre;
-    }
-
-    public setResponsible(responsible: string) {
-        this.responsible = responsible;
-    }
-}
-
-export interface BandInputDTO {
-    name: string;
-    music_genre: string;
-    responsible: string;
 }

@@ -2,7 +2,7 @@ import { BaseDatabase } from "./BaseDatabase";
 import { Band } from "../model/Band";
 
 export class BandDatabase extends BaseDatabase {
-    protected TABLE_NAME :string = "Lama_Bands";
+    protected TABLE_NAME :string = "LAMA_Bands";
 
     private toModel(bbModel?: any): Band | undefined {
         return (
@@ -28,6 +28,7 @@ export class BandDatabase extends BaseDatabase {
                 name,
                 music_genre,
                 responsible
-            }).into(this.TABLE_NAME)
+        })
+        .into(this.TABLE_NAME)
     }
-}
+};

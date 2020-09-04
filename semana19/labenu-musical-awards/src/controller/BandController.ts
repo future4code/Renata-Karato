@@ -2,11 +2,9 @@ import { Request, Response } from "express";
 import { IdGenerator } from "../services/IdGenerator";
 import { HashManager } from "../services/HashManager";
 import { Authenticator } from "../services/Authenticator";
-import { BandInputDTO, Band } from "../model/Band";
 import { BandDatabase } from "../data/BandDatabase";
 import { BandBusiness } from "../business/BandBusiness";
 import { BaseDatabase } from "../data/BaseDatabase";
-import { UserBusiness } from "../business/UserBusiness";
 
 export class BandController {
 
@@ -19,20 +17,31 @@ export class BandController {
 
     public async registerBand(req: Request, res: Response) {
         try {
-            const result = await BandController.BandBusiness.registerBand(
-                req.body.name,
-                req.body.music_genre,
-                req.body.responsible
-            );
+           
+            const name = req.body.name;
+            const musicGenre = req.body.music_genre;
+            const responsible = req.body.responsible;
                
             const token = req.headers.authorization as string;
 
+            const idGenerator = new IdGenerator();
+            const id = idGenerator.generate();
+            
             const authenticator = new Authenticator();
             const authenticationData = authenticator.getData(token)
             
             if (authenticationData.role !== "ADMIN") {
                 throw new Error("Only a admin user can access this funcionality")
             }
+
+            const bandDatabase = new BandDatabase();
+            await bandDatabase.registerBand(
+                id,
+                name,
+                musicGenre,
+                responsible
+            )
+
             res
                 .status(200)
                 .send({
